@@ -1,0 +1,20 @@
+---
+export const prerender = false;
+
+const { slug = [] } = Astro.params;
+const slugArray = Array.isArray(slug) ? slug : [slug];
+
+const res = await fetch(
+  `${import.meta.env.VITE_API_BASE_URL}/api/posts/${slugArray.join('/')}`
+);
+
+if (!res.ok) {
+  throw new Error('Post not found');
+}
+
+const post = await res.json();
+---
+<article>
+  <h1>{post.title}</h1>
+  <p>{post.content}</p>
+</article>

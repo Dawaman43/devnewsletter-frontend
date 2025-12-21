@@ -1,0 +1,81 @@
+---
+import { ArrowRight, Calendar } from '@lucide/astro';
+
+const newPosts = [
+  {
+    id: 1,
+    title: "How to Build a Newsletter with Astro",
+    excerpt:
+      "Discover the steps to create a modern, fast newsletter site using Astro, including tips on components, layouts, and deployment.",
+    date: "2025-12-20",
+    link: "/posts/build-newsletter-astro",
+  },
+  {
+    id: 2,
+    title: "Top 10 Astro Components for Your Newsletter",
+    excerpt:
+      "Explore the best Astro components to enhance your newsletter site, from icons to interactive elements.",
+    date: "2025-12-18",
+    link: "/posts/top-astro-components",
+  },
+  {
+    id: 3,
+    title: "Deploying Your Astro Newsletter with Vercel",
+    excerpt:
+      "Learn how to deploy your Astro-based newsletter site on Vercel for optimal performance and scalability.",
+    date: "2025-12-15",
+    link: "/posts/deploy-astro-newsletter-vercel",
+  },
+];
+---
+
+<section class="py-16 max-w-7xl mx-auto px-6">
+  <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-12 gap-4">
+    <h2 class="text-4xl font-serif font-medium text-gray-900 tracking-tight">
+      New writing
+    </h2>
+    <a
+      href="/archive"
+      class="group inline-flex items-center gap-2.5 text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors duration-300"
+    >
+      See all posts
+      <ArrowRight class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5" />
+    </a>
+  </div>
+
+  <!-- Horizontal scrolling grid on mobile, 3-column grid on larger screens -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-cols-max">
+    {newPosts.map((post) => (
+      <article class="group relative bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border border-gray-100 flex flex-col">
+        <!-- Subtle ink accent line on hover -->
+        <div class="absolute left-0 top-8 w-1 h-0 bg-amber-600 rounded-r-full transition-all duration-500 group-hover:h-20" />
+
+        <div class="flex items-center gap-2.5 text-sm text-gray-500 mb-4">
+          <Calendar class="w-4.5 h-4.5 text-amber-700" />
+          <time class="font-medium tracking-wide">{post.date}</time>
+        </div>
+
+        <h3 class="text-2xl font-serif leading-snug text-gray-900 mt-auto">
+          <a
+            href={post.link}
+            class="relative after:absolute after:left-0 after:bottom-0 after:w-0 after:h-0.5 after:bg-amber-600 after:rounded-full after:transition-all after:duration-500 hover:after:w-full"
+          >
+            {post.title}
+          </a>
+        </h3>
+
+        <p class="mt-4 text-base text-gray-700 leading-relaxed flex-1">
+          {post.excerpt}
+        </p>
+
+        <a
+          href={post.link}
+          class="mt-8 inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors duration-300"
+        >
+          Read more
+          <ArrowRight class="w-4 h-4 transition-all duration-300 opacity-70 group-hover:opacity-100 group-hover:translate-x-1" />
+        </a>
+      </article>
+    ))}
+  </div>
+</section>

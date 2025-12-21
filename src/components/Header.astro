@@ -1,0 +1,55 @@
+---
+import { Pen, Github, ExternalLink, Search } from '@lucide/astro';
+---
+
+<header class="max-w-7xl mx-auto px-6 py-10">
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-8">
+    <a 
+      href="/" 
+      class="group flex items-center gap-3.5 text-3xl font-serif font-medium text-gray-900 transition-all duration-300"
+    >
+      <div class="relative">
+        <Pen class="h-9 w-9 text-amber-700 transition-all duration-500 group-hover:rotate-12 group-hover:scale-110" 
+             strokeWidth={2.5} />
+        <div class="absolute inset-0 opacity-0 group-hover:opacity-40 transition-opacity duration-500">
+          <Pen class="h-9 w-9 text-amber-600 -rotate-6 scale-90 blur-sm" strokeWidth={3} />
+        </div>
+      </div>
+      <span class="relative tracking-tight">
+        DevNewsletter
+        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-amber-600 rounded-full transition-all duration-500 group-hover:w-full"></span>
+      </span>
+    </a>
+
+    <div class="relative max-w-lg w-full sm:w-auto">
+      <Search class="absolute left-5 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-500 pointer-events-none z-10" />
+      <input
+        type="search"
+        placeholder="Search articles, tools, insights…"
+        class="w-full pl-14 pr-12 py-4 bg-white border border-gray-200 rounded-2xl text-gray-800 placeholder-gray-500 
+               focus:outline-none focus:ring-4 focus:ring-amber-100 focus:border-amber-400 
+               shadow-sm hover:shadow-md transition-all duration-300 
+               backdrop-blur-sm"
+        aria-label="Search the newsletter"
+      />
+      <kbd class="absolute right-5 top-1/2 -translate-y-1/2 text-xs font-medium text-gray-400 tracking-wider hidden sm:block bg-gray-100 px-2 py-1 rounded-md">
+        ⌘K
+      </kbd>
+    </div>
+
+    <a
+      href="https://github.com/your-repo"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Star this project on GitHub"
+      class="group inline-flex items-center gap-3 rounded-xl bg-gradient-to-r from-gray-900 to-gray-800 px-7 py-3.5 
+             text-sm font-medium text-white shadow-lg transition-all duration-300 
+             hover:shadow-xl hover:-translate-y-1 hover:from-gray-800 hover:to-black 
+             focus:outline-none focus:ring-4 focus:ring-gray-400/30"
+    >
+      <Github class="h-5 w-5 transition-transform duration-300 group-hover:rotate-12" />
+      <span>Star on GitHub</span>
+      <ExternalLink class="h-4 w-4 opacity-70 transition-all group-hover:opacity-100 group-hover:translate-x-0.5" />
+    </a>
+  </div>
+</header>
