@@ -1,0 +1,23 @@
+---
+const headerNavs = [
+  { title: 'Dashboard', href: '/admin' },
+  { title: 'Posts', href: '/admin/posts' },
+  { title: 'New Post', href: '/admin/posts/new' },
+  
+];
+---
+
+<header>
+    <nav class="bg-white shadow p-4 flex justify-between items-center w-full">
+        <div class="text-xl font-bold">Newsletter Admin</div>
+        <ul class="flex space-x-4">
+        {headerNavs.map((nav) => (
+            <li>
+            <a href={nav.href} class="text-gray-700 hover:text-gray-900">
+                {nav.title}
+            </a>
+            </li>
+        ))}
+        </ul>
+    </nav>
+</header>
