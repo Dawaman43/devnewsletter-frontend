@@ -22,6 +22,25 @@ const { title = "Admin" } = Astro.props;
       </main>
     </div>
 
+    <script>
+      (function(){
+        function getToken(){
+          try{
+            const t = localStorage.getItem('token');
+            if (t) return t;
+          }catch(e){}
+          const m = document.cookie.match(/(?:^|; )token=([^;]+)/);
+          if (m) return decodeURIComponent(m[1]);
+          return null;
+        }
+
+        
+        if (!getToken()) {
+          window.location.href = '/admin/login';
+        }
+      })();
+    </script>
+
   
   </body>
 </html>
