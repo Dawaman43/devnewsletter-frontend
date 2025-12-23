@@ -1,0 +1,199 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { Code, GitBranch, Zap, Atom, Rocket, Send, Box, Palette } from '@lucide/astro'
+
+const title = 'Developer Tools'
+const description = 'Curated collection of essential tools for developers — editors, frameworks, utilities, and more.'
+---
+
+<Layout title={title} description={description}>
+  <header class="page-header">
+    <h1>{title}</h1>
+    <p>{description}</p>
+  </header>
+
+  <section class="tools-grid">
+    <article class="tool-card">
+      <div class="tool-header">
+        <Code class="tool-icon" />
+        <h3>VS Code</h3>
+        <span class="category">Editor</span>
+      </div>
+      <p>The most popular code editor with extensive extensions and customization options.</p>
+      <a href="https://code.visualstudio.com/" target="_blank" rel="noopener">Download</a>
+    </article>
+
+    <article class="tool-card">
+      <div class="tool-header">
+        <Code class="tool-icon" />
+        <h3>Neovim</h3>
+        <span class="category">Editor</span>
+      </div>
+      <p>A hyperextensible Vim-based text editor focused on usability and extensibility.</p>
+      <a href="https://neovim.io/" target="_blank" rel="noopener">Get Neovim</a>
+    </article>
+
+    <article class="tool-card">
+      <div class="tool-header">
+        <Code class="tool-icon" />
+        <h3>Zed</h3>
+        <span class="category">Editor</span>
+      </div>
+      <p>A high-performance, multiplayer code editor designed for speed and collaboration.</p>
+      <a href="https://zed.dev/" target="_blank" rel="noopener">Try Zed</a>
+    </article>
+
+    <article class="tool-card">
+      <div class="tool-header">
+        <GitBranch class="tool-icon" />
+        <h3>Git</h3>
+        <span class="category">Version Control</span>
+      </div>
+      <p>Distributed version control system for tracking changes in source code.</p>
+      <a href="https://git-scm.com/" target="_blank" rel="noopener">Learn More</a>
+    </article>
+
+    <article class="tool-card">
+      <div class="tool-header">
+        <Zap class="tool-icon" />
+        <h3>Node.js</h3>
+        <span class="category">Runtime</span>
+      </div>
+      <p>JavaScript runtime built on Chrome's V8 JavaScript engine.</p>
+      <a href="https://nodejs.org/" target="_blank" rel="noopener">Get Started</a>
+    </article>
+
+    <article class="tool-card">
+      <div class="tool-header">
+        <Atom class="tool-icon" />
+        <h3>React</h3>
+        <span class="category">Framework</span>
+      </div>
+      <p>A JavaScript library for building user interfaces.</p>
+      <a href="https://reactjs.org/" target="_blank" rel="noopener">Documentation</a>
+    </article>
+
+    <article class="tool-card">
+      <div class="tool-header">
+        <Rocket class="tool-icon" />
+        <h3>Astro</h3>
+        <span class="category">Framework</span>
+      </div>
+      <p>Build fast websites with less client-side JavaScript. This site is built with Astro!</p>
+      <a href="https://astro.build/" target="_blank" rel="noopener">Explore</a>
+    </article>
+
+    <article class="tool-card">
+      <div class="tool-header">
+        <Send class="tool-icon" />
+        <h3>Postman</h3>
+        <span class="category">API Testing</span>
+      </div>
+      <p>API development environment for designing, testing, and iterating APIs.</p>
+      <a href="https://www.postman.com/" target="_blank" rel="noopener">Try It</a>
+    </article>
+
+    <article class="tool-card">
+      <div class="tool-header">
+        <Box class="tool-icon" />
+        <h3>Docker</h3>
+        <span class="category">Containerization</span>
+      </div>
+      <p>Platform for developing, shipping, and running applications in containers.</p>
+      <a href="https://www.docker.com/" target="_blank" rel="noopener">Get Docker</a>
+    </article>
+
+    <article class="tool-card">
+      <div class="tool-header">
+        <Palette class="tool-icon" />
+        <h3>Figma</h3>
+        <span class="category">Design</span>
+      </div>
+      <p>Collaborative interface design tool for teams.</p>
+      <a href="https://www.figma.com/" target="_blank" rel="noopener">Design Now</a>
+    </article>
+  </section>
+
+  <style>
+    .page-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .page-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .page-header p {
+      font-size: 1.2rem;
+      color: var(--color-gray-600);
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .tool-card {
+      border: 1px solid var(--color-gray-200);
+      border-radius: 8px;
+      padding: 1.5rem;
+      background: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .tool-card:hover {
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+
+    .tool-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .tool-header h3 {
+      flex: 1;
+      margin: 0;
+      font-size: 1.25rem;
+    }
+
+    .tool-icon {
+      width: 24px;
+      height: 24px;
+      color: var(--color-primary);
+      margin-right: 0.5rem;
+    }
+
+    .tool-header h3 {
+      margin: 0;
+      font-size: 1.25rem;
+    }
+
+    .category {
+      background: var(--color-primary);
+      color: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .tool-card p {
+      margin-bottom: 1rem;
+      color: var(--color-gray-700);
+    }
+
+    .tool-card a {
+      color: var(--color-primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .tool-card a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</Layout>
