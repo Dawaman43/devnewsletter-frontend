@@ -1,5 +1,7 @@
 ---
 import { Pen, Github, ExternalLink, Search, BookOpen, Coffee } from '@lucide/astro';
+import HeaderQuote from './HeaderQuote.astro'
+export let showQuote = false;
 ---
 
 <header class="relative overflow-hidden">
@@ -84,24 +86,7 @@ import { Pen, Github, ExternalLink, Search, BookOpen, Coffee } from '@lucide/ast
       </div>
     </div>
 
-    <div class="mt-16 text-center">
-      <div class="relative inline-block">
-        <svg class="absolute -top-4 -left-8 w-8 h-8 text-amber-300" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-          <path d="M8 12 Q4 16 8 20 Q12 24 16 20" fill="none" stroke="currentColor" stroke-width="2" />
-        </svg>
-        <svg class="absolute -top-4 -right-8 w-8 h-8 text-amber-300" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-          <path d="M24 12 Q28 16 24 20 Q20 24 16 20" fill="none" stroke="currentColor" stroke-width="2" />
-        </svg>
-        
-        <blockquote class="text-2xl md:text-3xl font-serif italic text-gray-700 max-w-4xl mx-auto leading-relaxed relative z-10"
-                    style="font-family: 'Caveat', cursive;">
-          "Talk is cheap. Show me the code."
-        </blockquote>
-      </div>
-      <cite class="text-sm font-medium text-gray-500 mt-4 block font-handwritten" style="font-family: 'Caveat', cursive;">
-        — Linus Torvalds 💻
-      </cite>
-    </div>
+    {showQuote && <HeaderQuote />}
   </div>
 
   <style>

@@ -5,6 +5,7 @@ import Quote from "../components/Home/Quote.astro"
 import Header from "../components/Header.astro"
 import Footer from "../components/Footer.astro"
 import "../styles/global.css"
+export let showHeaderQuote = false;
 ---
 
 <!DOCTYPE html>
@@ -126,7 +127,7 @@ import "../styles/global.css"
 </head>
 
 <body class="antialiased">
-    <Header />
+    <Header showQuote={showHeaderQuote} />
     
     <main class="relative">
         <section class="relative overflow-hidden bg-gradient-to-br from-amber-50/30 via-orange-50/20 to-yellow-50/30">
