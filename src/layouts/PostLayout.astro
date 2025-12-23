@@ -1,0 +1,292 @@
+---
+import "../styles/global.css"
+import { ArrowLeft } from '@lucide/astro'
+
+export interface Props {
+  title: string
+  description?: string
+  pubDate?: string
+  author?: string
+  heroImage?: string
+}
+
+const { title, description, pubDate, author = "Your Bro", heroImage } = Astro.props
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title} — DevNewsletter</title>
+    <meta name="description" content={description} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --font-serif: "Crimson Text", serif;
+        --font-sans: "Inter", sans-serif;
+        --primary: #f59e0b;
+        --primary-soft: #fffbeb;
+        --text-main: #171717;
+        --text-muted: #737373;
+        --border-soft: #e5e5e5;
+      }
+
+      body {
+        margin: 0;
+        font-family: var(--font-sans);
+        background: #ffffff;
+        color: var(--text-main);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      #progress-bar {
+        position: fixed;
+        inset: 0 auto auto 0;
+        height: 3px;
+        width: 0%;
+        background: linear-gradient(90deg, #f59e0b, #fbbf24);
+        z-index: 50;
+        transition: width 0.1s linear;
+      }
+
+      .container {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 2.5rem 1.5rem;
+      }
+
+      .post-header {
+        text-align: center;
+        padding-top: 5rem;
+        margin-bottom: 4rem;
+      }
+
+      .post-title {
+        font-family: var(--font-serif);
+        font-size: 3.25rem;
+        line-height: 1.1;
+        letter-spacing: -0.025em;
+        margin-bottom: 1.25rem;
+      }
+
+      .post-meta {
+        font-size: 0.8rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+      }
+
+      .post-description {
+        font-family: var(--font-serif);
+        font-size: 1.25rem;
+        font-style: italic;
+        color: var(--text-muted);
+        max-width: 36rem;
+        margin: 0 auto;
+      }
+
+      .hero {
+        max-width: 960px;
+        margin: 0 auto 5rem;
+        padding: 0 1.5rem;
+      }
+
+      .hero img {
+        width: 100%;
+        border-radius: 1.75rem;
+        box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.25);
+      }
+
+      .post-content {
+        font-family: var(--font-serif);
+        font-size: 1.25rem;
+        line-height: 1.85;
+        color: #262626;
+      }
+
+      .post-content :global(h2) {
+        font-size: 2.2rem;
+        margin-top: 3.5rem;
+        margin-bottom: 1.25rem;
+      }
+
+      .post-content :global(p) {
+        margin-bottom: 1.75rem;
+      }
+
+      .divider {
+        border: none;
+        border-top: 1px solid var(--border-soft);
+        margin: 5rem 0 3rem;
+      }
+
+      .feedback-card {
+        background: var(--primary-soft);
+        border: 1px solid #fde68a;
+        border-radius: 1.5rem;
+        padding: 3rem;
+        text-align: center;
+      }
+
+      .feedback-title {
+        font-family: var(--font-serif);
+        font-size: 1.75rem;
+        margin-bottom: 2rem;
+        color: #92400e;
+      }
+
+      .feedback-actions {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+      }
+
+      .feedback-btn {
+        width: 64px;
+        height: 64px;
+        border-radius: 9999px;
+        border: 1px solid #fde68a;
+        background: #ffffff;
+        font-size: 1.75rem;
+        cursor: pointer;
+        transition: transform 0.15s ease, background-color 0.15s ease;
+      }
+
+      .feedback-btn:hover {
+        transform: scale(1.1);
+        background: #fffbeb;
+      }
+
+      .feedback-btn:active {
+        transform: scale(0.95);
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .fade-in {
+        animation: fade 0.35s ease forwards;
+      }
+
+      @keyframes fade {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 640px) {
+        .post-title {
+          font-size: 2.4rem;
+        }
+
+        .post-content {
+          font-size: 1.15rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="progress-bar"></div>
+
+    <div class="container" style="margin-top:1rem">
+      <a href="/" class="inline-flex items-center text-gray-700 hover:underline gap-2">
+        <ArrowLeft class="w-4 h-4" />
+        Back to home
+      </a>
+    </div>
+
+    <article>
+      <header class="post-header container">
+        <div class="post-meta">
+          {pubDate && <time>{pubDate}</time>} • <span>By {author}</span>
+        </div>
+        <h1 class="post-title">{title}</h1>
+        {description && <p class="post-description">{description}</p>}
+      </header>
+
+      {heroImage && (
+        <div class="hero">
+          <img src={heroImage} alt={title} />
+        </div>
+      )}
+
+      <div class="post-content container">
+        <slot />
+      </div>
+    </article>
+
+    <div class="container">
+      <hr class="divider" />
+
+      <div class="feedback-card" id="feedback-box">
+        <div id="feedback-prompt">
+          <h3 class="feedback-title">Did you enjoy this dev note?</h3>
+          <div class="feedback-actions">
+            <button id="like-btn" class="feedback-btn" aria-label="Yes">
+              👍
+            </button>
+            <button id="dislike-btn" class="feedback-btn" aria-label="No">
+              👎
+            </button>
+          </div>
+        </div>
+
+        <div id="feedback-thanks" class="hidden fade-in">
+          <h3 id="thanks-message" class="feedback-title"></h3>
+          <p style="color:#92400e;margin-top:.5rem">
+            Your feedback helps me write better content.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const progressBar = document.getElementById("progress-bar")
+      window.addEventListener("scroll", () => {
+        const scrolled =
+          (document.documentElement.scrollTop /
+            (document.documentElement.scrollHeight -
+              document.documentElement.clientHeight)) *
+          100
+        if (progressBar) progressBar.style.width = scrolled + "%"
+      })
+
+      const promptEl = document.getElementById("feedback-prompt")
+      const thanksEl = document.getElementById("feedback-thanks")
+      const messageEl = document.getElementById("thanks-message")
+
+      function handleFeedback(isPositive: boolean) {
+        promptEl?.classList.add("hidden")
+        thanksEl?.classList.remove("hidden")
+        if (messageEl)
+          messageEl.textContent = isPositive
+            ? "Glad you liked it 🚀"
+            : "Thanks — I’ll improve 🫡"
+      }
+
+      document
+        .getElementById("like-btn")
+        ?.addEventListener("click", () => handleFeedback(true))
+      document
+        .getElementById("dislike-btn")
+        ?.addEventListener("click", () => handleFeedback(false))
+    </script>
+  </body>
+</html>

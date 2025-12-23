@@ -1,68 +1,19 @@
 ---
 import { ArrowRight, Calendar, Clock, Eye, Heart } from '@lucide/astro';
 
-const newPosts = [
-  {
-    id: 1,
-    title: "How to Build a Newsletter with Astro",
-    excerpt: "Discover the steps to create a modern, fast newsletter site using Astro, including tips on components, layouts, and deployment.",
-    date: "2025-12-20",
-    readTime: "8 min read",
-    category: "Tutorial",
-    link: "/posts/build-newsletter-astro",
-    tags: ["astro", "newsletter", "web development"]
-  },
-  {
-    id: 2,
-    title: "The Art of Minimal Code: Finding Beauty in Simplicity",
-    excerpt: "Explore how to write cleaner, more maintainable code by embracing minimalism and focusing on what truly matters in your applications.",
-    date: "2025-12-18",
-    readTime: "12 min read", 
-    category: "Philosophy",
-    link: "/posts/minimal-code-art",
-    tags: ["clean code", "minimalism", "best practices"]
-  },
-  {
-    id: 3,
-    title: "Deploying Your Astro Newsletter with Vercel",
-    excerpt: "Learn how to deploy your Astro-based newsletter site on Vercel for optimal performance and scalability.",
-    date: "2025-12-15",
-    readTime: "6 min read",
-    category: "Deployment",
-    link: "/posts/deploy-astro-newsletter-vercel", 
-    tags: ["deployment", "vercel", "astro"]
-  },
-  {
-    id: 4,
-    title: "Why TypeScript Changes How You Think About JavaScript",
-    excerpt: "Dive deep into how TypeScript fundamentally shifts your programming mindset and makes you a better JavaScript developer.",
-    date: "2025-12-12",
-    readTime: "15 min read",
-    category: "Programming",
-    link: "/posts/typescript-mindset",
-    tags: ["typescript", "javascript", "programming"]
-  },
-  {
-    id: 5,
-    title: "Building Accessible Web Experiences That Matter",
-    excerpt: "A comprehensive guide to creating web applications that work for everyone, focusing on practical accessibility patterns.",
-    date: "2025-12-10",
-    readTime: "10 min read",
-    category: "Accessibility",
-    link: "/posts/accessible-web-experiences",
-    tags: ["accessibility", "inclusive design", "ui/ux"]
-  },
-  {
-    id: 6,
-    title: "The Psychology of Developer Tools and Workflow",
-    excerpt: "Understanding how our tools shape our thinking and how to create development environments that enhance creativity and productivity.",
-    date: "2025-12-08",
-    readTime: "11 min read",
-    category: "Productivity",
-    link: "/posts/developer-psychology",
-    tags: ["workflow", "productivity", "psychology"]
-  }
-];
+const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/posts`);
+const postsData = await response.json();
+
+const newPosts = postsData.map((post: any) => ({
+  id: post.id,
+  title: post.title,
+  excerpt: "Read the full article to discover more.", // Placeholder since content not included in list
+  date: post.created_at.split('T')[0],
+  readTime: "5 min read",
+  category: "General", 
+  link: `/posts/${post.id}`, 
+  tags: [] 
+}));
 
 const categoryColors = {
   "Tutorial": "from-blue-500/10 to-blue-600/5 border-blue-200/30",
