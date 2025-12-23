@@ -1,0 +1,32 @@
+[
+  {
+    "id": "alice",
+    "name": "Alice Monroe",
+    "role": "Editor & Writer",
+    "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&auto=format&fit=crop&q=60",
+    "bio": "Experienced tech writer and editor. Loves newsletters, long-form research, and making complex ideas approachable.",
+    "twitter": "alicemonroe",
+    "github": "alicemonroe",
+    "website": "https://alicemonroe.example.com"
+  },
+  {
+    "id": "ben",
+    "name": "Ben Ortega",
+    "role": "Contributor — Data & Analysis",
+    "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&auto=format&fit=crop&q=60",
+    "bio": "Data journalist focusing on trends in tech and open data. Occasional visualizer and coffee enthusiast.",
+    "twitter": "ben_data",
+    "github": "bortega",
+    "website": ""
+  },
+  {
+    "id": "carla",
+    "name": "Carla Nguyen",
+    "role": "Guest Writer",
+    "avatar": "https://images.unsplash.com/photo-1545996124-1b6d6f2d1e8f?w=600&auto=format&fit=crop&q=60",
+    "bio": "Researcher and guest author. Writes about ethics, AI, and design.\n\nLoves collaboration and good footnotes.",
+    "twitter": "",
+    "github": "carla-ng",
+    "website": "https://carlanguyen.example.com"
+  }
+]
