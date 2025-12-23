@@ -6,6 +6,7 @@ import Header from "../components/Header.astro"
 import Footer from "../components/Footer.astro"
 import "../styles/global.css"
 export let showHeaderQuote = false;
+export let showHero = false;
 ---
 
 <!DOCTYPE html>
@@ -130,6 +131,7 @@ export let showHeaderQuote = false;
     <Header showQuote={showHeaderQuote} />
     
     <main class="relative">
+        {showHero && (
         <section class="relative overflow-hidden bg-gradient-to-br from-amber-50/30 via-orange-50/20 to-yellow-50/30">
             <div class="absolute inset-0 opacity-[0.03] pointer-events-none">
                 <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0); background-size: 30px 30px;"></div>
@@ -180,6 +182,7 @@ export let showHeaderQuote = false;
                 </div>
             </div>
         </section>
+        )}
         
         <slot />
     </main>
