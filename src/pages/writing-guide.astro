@@ -1,0 +1,110 @@
+---
+import Layout from '../layouts/Layout.astro'
+
+const title = 'Writing Guide'
+const description = 'A comprehensive guide to writing clear, engaging content for developers and tech enthusiasts.'
+---
+
+<Layout title={title} description={description}>
+  <header class="page-header">
+    <h1>{title}</h1>
+    <p>{description}</p>
+  </header>
+
+  <section class="guide-content">
+    <article class="guide-section">
+      <h2>1. Know Your Audience</h2>
+      <p>
+        Before you start writing, understand who you're writing for. In the tech world, your readers are developers, designers, and tech enthusiasts who value practical, actionable information. Keep your language accessible but not condescending.
+      </p>
+    </article>
+
+    <article class="guide-section">
+      <h2>2. Structure Your Content</h2>
+      <p>
+        Use a clear structure: introduction, main content, and conclusion. Break down complex topics into digestible sections with headings. Use bullet points and numbered lists for easy scanning.
+      </p>
+    </article>
+
+    <article class="guide-section">
+      <h2>3. Be Concise and Clear</h2>
+      <p>
+        Get to the point quickly. Avoid unnecessary jargon or explain it when used. Use short sentences and paragraphs. Your readers are busy — respect their time.
+      </p>
+    </article>
+
+    <article class="guide-section">
+      <h2>4. Use Code Examples</h2>
+      <p>
+        When explaining technical concepts, include code snippets. Make sure they're well-commented and demonstrate best practices. Use syntax highlighting for better readability.
+      </p>
+    </article>
+
+    <article class="guide-section">
+      <h2>5. Include Visuals</h2>
+      <p>
+        Screenshots, diagrams, and flowcharts can greatly enhance understanding. Ensure images are high-quality and properly captioned.
+      </p>
+    </article>
+
+    <article class="guide-section">
+      <h2>6. Proofread and Edit</h2>
+      <p>
+        Always proofread your work. Read it aloud to catch awkward phrasing. Consider having someone else review it for clarity and accuracy.
+      </p>
+    </article>
+
+    <article class="guide-section">
+      <h2>7. Engage Your Readers</h2>
+      <p>
+        End with a call to action. Ask questions, encourage comments, or suggest related topics. Building a community around your content is key to long-term success.
+      </p>
+    </article>
+  </section>
+
+  <style>
+    .page-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .page-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .page-header p {
+      font-size: 1.2rem;
+      color: var(--color-gray-600);
+    }
+
+    .guide-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .guide-section {
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      border-left: 4px solid var(--color-primary);
+      background: var(--color-gray-50);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .guide-section h2 {
+      color: var(--color-primary);
+      margin-bottom: 0.5rem;
+      font-size: 1.5rem;
+    }
+
+    .guide-section p {
+      line-height: 1.6;
+      color: var(--color-gray-700);
+    }
+
+    @media (max-width: 768px) {
+      .guide-section {
+        padding: 1rem;
+      }
+    }
+  </style>
+</Layout>
