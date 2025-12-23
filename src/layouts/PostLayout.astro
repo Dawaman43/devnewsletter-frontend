@@ -206,10 +206,10 @@ const { title, description, pubDate, author = "Your Bro", heroImage } = Astro.pr
     <div id="progress-bar"></div>
 
     <div class="container" style="margin-top:1rem">
-      <a href="/" class="inline-flex items-center text-gray-700 hover:underline gap-2">
+      <button type="button" onclick="history.back()" aria-label="Go back" class="inline-flex items-center text-gray-700 hover:underline gap-2 bg-transparent border-0 p-0 cursor-pointer">
         <ArrowLeft class="w-4 h-4" />
-        Back to home
-      </a>
+        Back
+      </button>
     </div>
 
     <article>
