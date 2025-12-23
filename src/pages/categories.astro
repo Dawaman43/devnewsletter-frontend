@@ -1,0 +1,64 @@
+---
+export const prerender = true;
+
+const modules: any[] = Object.values(
+    import.meta.glob('../../content/**/*.{md,mdx,svx}', { eager: true })
+);
+
+const posts = modules
+    .map((m: any) => m.frontmatter ?? m.metadata ?? {})
+    .filter(Boolean);
+
+const map = new Map();
+for (const post of posts) {
+    const cats = post.categories ?? post.category ?? [];
+    const arr = Array.isArray(cats) ? cats : [cats];
+    for (const c of arr) {
+        if (!c) continue;
+        map.set(c, (map.get(c) || 0) + 1);
+    }
+}
+const categories = Array.from(map.entries()).sort((a, b) => b[1] - a[1]);
+
+const slug = (s: string) =>
+    encodeURIComponent(
+        s
+            .toLowerCase()
+            .trim()
+            .replace(/\s+/g, '-')
+            .replace(/[^\w-]/g, '')
+    );
+---
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Categories</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <style>
+            :root { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; padding: 20px; }
+            a { color: #0b5fff; text-decoration: none; }
+            a:hover { text-decoration: underline; }
+            .list { max-width: 640px; margin: 0; padding: 0; list-style: none; }
+            .item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; }
+            .empty { color: #666; }
+        </style>
+    </head>
+    <body>
+        <main>
+            <h1>Categories</h1>
+
+            {categories.length === 0 ? (
+                <p class="empty">No categories found.</p>
+            ) : (
+                <ul class="list">
+                    {categories.map(([name, count]) => (
+                        <li class="item">
+                            <a href={`/categories/${slug(String(name))}/`}>{name}</a>
+                            <span>{count}</span>
+                        </li>
+                    ))}
+                </ul>
+            )}
+        </main>
+    </body>
+</html>
