@@ -7,54 +7,182 @@ function getDailyQuote() {
 
   const today = new Date();
   const dateString = today.toISOString().slice(0, 10); 
-  
   let hash = 0;
   for (let i = 0; i < dateString.length; i++) {
     hash = (hash << 5) - hash + dateString.charCodeAt(i);
     hash = hash & hash;
   }
-  
   const index = Math.abs(hash) % quotes.length;
   return quotes[index];
 }
 
 const dailyQuote = getDailyQuote();
+
+const writingQuotes = [
+  {
+    text: "The first draft of anything is shit.",
+    author: "Ernest Hemingway"
+  },
+  {
+    text: "You can't wait for inspiration. You have to go after it with a club.",
+    author: "Jack London"
+  },
+  {
+    text: "The scariest moment is always just before you start.",
+    author: "Stephen King"
+  },
+  {
+    text: "A writer is someone for whom writing is more difficult than it is for other people.",
+    author: "Thomas Mann"
+  },
+  {
+    text: "The art of writing is the art of discovering what you believe.",
+    author: "John Dufresne"
+  },
+  {
+    text: "We write to taste life twice, in the moment and in retrospection.",
+    author: "Anaïs Nin"
+  }
+];
+
+// Use writing quotes if no dailyQuote available
+const displayQuote = dailyQuote || writingQuotes[Math.floor(Math.random() * writingQuotes.length)];
 ---
 
-<section class="my-24 max-w-4xl mx-auto px-6">
-  <div class="relative bg-gradient-to-br from-amber-50/70 to-orange-50/50 rounded-3xl px-10 py-14 overflow-hidden">
-    <div class="absolute inset-0 opacity-10">
-      <div class="absolute top-4 left-8 w-32 h-32 bg-amber-600 rounded-full blur-3xl"></div>
-      <div class="absolute bottom-6 right-12 w-40 h-40 bg-orange-500 rounded-full blur-3xl"></div>
+<section class="py-32 relative overflow-hidden">
+  <!-- Background Elements -->
+  <div class="absolute inset-0 opacity-[0.015]">
+    <!-- Animated background text -->
+    <div class="absolute inset-0 flex items-center justify-center">
+      <div class="text-[20rem] font-serif text-gray-900 select-none leading-none opacity-20 animate-pulse">
+        "
+      </div>
     </div>
-
-    <div class="relative text-center">
-      {dailyQuote ? (
-        <>
-          <!-- Quote mark -->
-          <div class="text-7xl font-serif text-amber-700/40 select-none leading-none mb-6">
-            “
-          </div>
-
-          <!-- Quote text -->
-          <blockquote class="text-2xl md:text-3xl font-serif italic text-gray-800 leading-relaxed max-w-3xl mx-auto">
-            {typeof dailyQuote === "string" ? dailyQuote : dailyQuote.text}
-          </blockquote>
-
-          <!-- Author (if exists) -->
-          {typeof dailyQuote !== "string" && dailyQuote.author && (
-            <p class="mt-8 text-lg text-gray-600 font-medium">
-              — {dailyQuote.author}
-            </p>
-          )}
-        </>
-      ) : (
-        <p class="text-gray-500">No quotes available.</p>
-      )}
-    </div>
+    
+    <!-- Floating particles -->
+    <div class="absolute top-1/4 left-1/4 w-2 h-2 bg-amber-400 rounded-full opacity-60 animate-bounce"></div>
+    <div class="absolute top-1/3 right-1/4 w-1 h-1 bg-orange-400 rounded-full opacity-40 animate-pulse"></div>
+    <div class="absolute bottom-1/4 left-1/3 w-1.5 h-1.5 bg-yellow-400 rounded-full opacity-50 animate-ping"></div>
+    <div class="absolute bottom-1/3 right-1/3 w-1 h-1 bg-amber-300 rounded-full opacity-30 animate-bounce"></div>
   </div>
 
-  <p class="text-center text-sm text-gray-500 mt-6">
-    A new thought every day
-  </p>
+  <div class="relative max-w-5xl mx-auto px-6">
+    
+    <!-- Quote Container -->
+    <div class="relative bg-gradient-to-br from-white via-amber-50/30 to-orange-50/20 rounded-[3rem] p-16 md:p-24 shadow-2xl border border-amber-100/50 overflow-hidden backdrop-blur-sm">
+      
+      <!-- Background decorations -->
+      <div class="absolute inset-0 overflow-hidden">
+        <!-- Large quote mark -->
+        <div class="absolute -top-8 -left-8 text-[12rem] font-serif text-amber-200/30 select-none leading-none">
+          "
+        </div>
+        
+        <!-- Gradient blobs -->
+        <div class="absolute top-8 right-8 w-32 h-32 bg-gradient-to-br from-amber-200/20 to-orange-200/10 rounded-full blur-2xl"></div>
+        <div class="absolute bottom-8 left-8 w-40 h-40 bg-gradient-to-tr from-orange-200/15 to-yellow-200/10 rounded-full blur-3xl"></div>
+        
+        <!-- Subtle grid pattern -->
+        <div class="absolute inset-0 opacity-[0.02]" 
+             style="background-image: linear-gradient(currentColor 1px, transparent 1px), linear-gradient(90deg, currentColor 1px, transparent 1px); background-size: 30px 30px;"></div>
+      </div>
+
+      <div class="relative text-center">
+        
+        <!-- Decorative divider -->
+        <div class="flex items-center justify-center mb-12">
+          <div class="h-px bg-gradient-to-r from-transparent via-amber-300 to-transparent flex-1 max-w-24"></div>
+          <div class="mx-6 w-2 h-2 bg-amber-400 rounded-full"></div>
+          <div class="h-px bg-gradient-to-r from-transparent via-amber-300 to-transparent flex-1 max-w-24"></div>
+        </div>
+
+        <!-- Quote mark -->
+        <div class="text-8xl md:text-9xl font-serif text-amber-600/20 select-none leading-none mb-8">
+          "
+        </div>
+
+        <!-- Quote text -->
+        <blockquote class="text-3xl md:text-4xl lg:text-5xl font-serif italic text-gray-800 leading-relaxed max-w-4xl mx-auto mb-12 relative">
+          <span class="relative z-10">{displayQuote.text}</span>
+          
+          <!-- Underline effect on hover -->
+          <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-amber-600 to-orange-500 rounded-full transition-all duration-1000 group-hover:w-full"></div>
+        </blockquote>
+
+        <!-- Author -->
+        {displayQuote.author && (
+          <div class="space-y-2">
+            <cite class="text-lg md:text-xl font-medium text-gray-600 font-serif block">
+              — {displayQuote.author}
+            </cite>
+            
+            <!-- Author role/style indicator -->
+            <p class="text-sm text-gray-500 font-serif italic">
+              {displayQuote.author === "Ernest Hemingway" && "American novelist and short story writer"}
+              {displayQuote.author === "Jack London" && "American novelist and journalist"}
+              {displayQuote.author === "Stephen King" && "American author"}
+              {displayQuote.author === "Thomas Mann" && "German novelist and essayist"}
+              {displayQuote.author === "John Dufresne" && "American novelist and writing teacher"}
+              {displayQuote.author === "Anaïs Nin" && "French-Cuban-American writer"}
+            </p>
+          </div>
+        )}
+
+        <!-- Decorative divider -->
+        <div class="flex items-center justify-center mt-12">
+          <div class="h-px bg-gradient-to-r from-transparent via-amber-300 to-transparent flex-1 max-w-24"></div>
+          <div class="mx-6 w-2 h-2 bg-amber-400 rounded-full"></div>
+          <div class="h-px bg-gradient-to-r from-transparent via-amber-300 to-transparent flex-1 max-w-24"></div>
+        </div>
+      </div>
+
+      <!-- Interactive elements -->
+      <div class="absolute bottom-8 right-8 flex items-center gap-4">
+        <!-- Share button -->
+        <button class="group p-3 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100/50">
+          <svg class="w-5 h-5 text-gray-600 group-hover:text-gray-900 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path>
+          </svg>
+        </button>
+        
+        <!-- Bookmark button -->
+        <button class="group p-3 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100/50">
+          <svg class="w-5 h-5 text-gray-600 group-hover:text-gray-900 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Quote context -->
+    <div class="mt-16 text-center">
+      <p class="text-lg font-serif italic text-gray-600 mb-8">
+        A moment of reflection for today's craft
+      </p>
+      
+      <!-- Progress indicator -->
+      <div class="flex items-center justify-center gap-2 mb-8">
+        <div class="flex gap-1">
+          {[...Array(7)].map((_, i) => (
+            <div 
+              class={`w-2 h-2 rounded-full transition-all duration-300 ${
+                i === new Date().getDay() ? 'bg-amber-500' : 'bg-gray-200'
+              }`}
+            ></div>
+          ))}
+        </div>
+      </div>
+      
+      <!-- Quote archive link -->
+      <a 
+        href="/quotes" 
+        class="inline-flex items-center gap-3 text-sm font-medium text-gray-500 hover:text-gray-900 transition-all duration-300 px-6 py-3 rounded-2xl hover:bg-gray-50"
+      >
+        Explore the complete collection
+        <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
 </section>

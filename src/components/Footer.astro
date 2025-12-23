@@ -1,23 +1,217 @@
 ---
-import { ExternalLink } from '@lucide/astro';
+// Enhanced Footer Component with Writers Vibe
+import { ExternalLink, Coffee, Heart, Pen, Github, X, Mail } from '@lucide/astro';
 ---
 
-<footer class="mt-32 py-16 border-t border-gray-200 bg-gradient-to-b from-transparent to-gray-50/30">
-  <div class="max-w-7xl mx-auto px-6 text-center">
-    <a
-      href="https://t.me/daw9t"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="group inline-flex items-center gap-3 text-lg font-medium text-gray-700 hover:text-gray-900 transition-all duration-500"
-    >
-      <span class="relative">
-        Chat with me on Telegram
-        <!-- Handwritten-style underline -->
-        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-amber-600 rounded-full transition-all duration-700 group-hover:w-full"></span>
-      </span>
-      <ExternalLink class="w-5 h-5 opacity-60 transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-0.5 group-hover:rotate-12" />
-    </a>
+<footer class="relative overflow-hidden bg-gradient-to-b from-transparent via-gray-50/30 to-gray-50 border-t border-gray-100">
+  <!-- Background pattern -->
+  <div class="absolute inset-0 opacity-[0.02]">
+    <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="footer-pattern" x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse">
+          <text x="60" y="60" font-family="serif" font-size="80" text-anchor="middle" fill="currentColor" opacity="0.1">@</text>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#footer-pattern)"/>
+    </svg>
+  </div>
 
+  <div class="relative">
+        <div class="max-w-7xl mx-auto px-6 py-20">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <div class="lg:col-span-6">
+          <div class="mb-8">
+            <a 
+              href="/" 
+              class="group inline-flex items-center gap-4 text-3xl font-serif font-medium text-gray-900 transition-all duration-500 hover:gap-6"
+            >
+              <div class="relative">
+                <Pen class="h-8 w-8 text-amber-600 transition-all duration-500 group-hover:rotate-12 group-hover:scale-110" 
+                     stroke-width={1.5} />
+                <div class="absolute inset-0 opacity-0 group-hover:opacity-40 transition-opacity duration-300">
+                  <Pen class="h-8 w-8 text-amber-500 -rotate-6 scale-95" stroke-width={2} />
+                </div>
+              </div>
+              <div class="relative">
+                <span class="relative tracking-tight">
+                  DevNewsletter
+                  <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-600 to-orange-500 rounded-full transition-all duration-700 group-hover:w-full"></span>
+                </span>
+                <p class="text-sm font-medium text-gray-500 mt-1 tracking-wide">for the creative developer</p>
+              </div>
+            </a>
+          </div>
+          
+          <p class="text-gray-600 font-serif italic text-lg leading-relaxed max-w-md mb-8">
+            "Crafting stories that bridge the gap between technology and creativity, one newsletter at a time."
+          </p>
+          
+          <div class="flex items-center gap-4">
+            <a
+              href="https://github.com/dawaman43"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group p-3 bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 border border-gray-100"
+              aria-label="GitHub"
+            >
+              <Github class="w-5 h-5 text-gray-600 group-hover:text-gray-900 transition-colors duration-300" />
+            </a>
+            
+            <a
+              href="https://x.com/dawitcodes"
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="group p-3 bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 border border-gray-100"
+              aria-label="X"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="text-gray-600 group-hover:text-gray-900 transition-colors duration-300" viewBox="0 0 16 16">
+                <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+              </svg>
+            </a>
+            
+            <a
+              href="mailto:dawitworkujima@gmail.com"
+              class="group p-3 bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 border border-gray-100"
+              aria-label="Email"
+            >
+              <Mail class="w-5 h-5 text-gray-600 group-hover:text-gray-900 transition-colors duration-300" />
+            </a>
+          </div>
+        </div>
+        
+        <div class="lg:col-span-3">
+          <h4 class="text-lg font-serif font-medium text-gray-900 mb-6">Explore</h4>
+          <nav class="space-y-4">
+            <a href="/archive" class="block text-gray-600 hover:text-gray-900 transition-colors duration-300 font-serif">
+              All Stories
+            </a>
+            <a href="/categories" class="block text-gray-600 hover:text-gray-900 transition-colors duration-300 font-serif">
+              Categories
+            </a>
+            <a href="/authors" class="block text-gray-600 hover:text-gray-900 transition-colors duration-300 font-serif">
+              Contributors
+            </a>
+            <a href="/tools" class="block text-gray-600 hover:text-gray-900 transition-colors duration-300 font-serif">
+              Developer Tools
+            </a>
+            <a href="/newsletter" class="block text-gray-600 hover:text-gray-900 transition-colors duration-300 font-serif">
+              Subscribe
+            </a>
+          </nav>
+        </div>
+        
+        <div class="lg:col-span-3">
+          <h4 class="text-lg font-serif font-medium text-gray-900 mb-6">Resources</h4>
+          <nav class="space-y-4">
+            <a href="/about" class="block text-gray-600 hover:text-gray-900 transition-colors duration-300 font-serif">
+              About Us
+            </a>
+            <a href="/writing-guide" class="block text-gray-600 hover:text-gray-900 transition-colors duration-300 font-serif">
+              Writing Guide
+            </a>
+            <a href="/style-guide" class="block text-gray-600 hover:text-gray-900 transition-colors duration-300 font-serif">
+              Style Guide
+            </a>
+            <a href="/submit" class="block text-gray-600 hover:text-gray-900 transition-colors duration-300 font-serif">
+              Submit a Story
+            </a>
+            <a href="/rss" class="block text-gray-600 hover:text-gray-900 transition-colors duration-300 font-serif">
+              RSS Feed
+            </a>
+          </nav>
+        </div>
+      </div>
+    </div>
     
+    <div class="border-t border-gray-100 bg-gradient-to-r from-amber-50/50 via-orange-50/30 to-amber-50/50">
+      <div class="max-w-7xl mx-auto px-6 py-16">
+        <div class="max-w-3xl mx-auto text-center">
+          <div class="inline-flex items-center gap-3 mb-6 px-6 py-3 bg-white/80 backdrop-blur-sm rounded-full border border-amber-200/30">
+            <Coffee class="w-5 h-5 text-amber-600" />
+            <span class="text-sm font-medium text-amber-800 tracking-wide">Support the craft</span>
+          </div>
+          
+          <h3 class="text-3xl font-serif font-medium text-gray-900 mb-4">
+            Stay in the loop
+          </h3>
+          <p class="text-gray-600 font-serif italic mb-8 max-w-2xl mx-auto">
+            Get fresh insights, carefully curated tools, and inspiring stories delivered to your inbox every week.
+          </p>
+          
+          <div class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+            <input 
+              type="email" 
+              placeholder="your@email.com"
+              class="flex-1 px-6 py-4 rounded-2xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-amber-200 focus:border-amber-400 font-serif bg-white/80 backdrop-blur-sm"
+            />
+            <button class="px-8 py-4 bg-gradient-to-r from-amber-600 to-orange-600 text-white rounded-2xl font-medium hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+              Subscribe
+            </button>
+          </div>
+          
+          <p class="text-xs text-gray-500 mt-4 font-serif">
+            No spam, unsubscribe anytime. We respect your inbox.
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="border-t border-gray-100 bg-white/50">
+      <div class="max-w-7xl mx-auto px-6 py-12">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+          
+          <div class="text-center md:text-left">
+            <a
+              href="https://t.me/daw9t"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group inline-flex items-center gap-3 text-lg font-medium text-gray-700 hover:text-gray-900 transition-all duration-500 px-6 py-3 rounded-2xl hover:bg-white/80"
+            >
+              <span class="relative">
+                Chat with me on Telegram
+                <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-amber-600 rounded-full transition-all duration-700 group-hover:w-full"></span>
+              </span>
+              <ExternalLink class="w-5 h-5 opacity-60 transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-0.5 group-hover:rotate-12" />
+            </a>
+          </div>
+          
+          <div class="hidden md:block w-px h-12 bg-gray-200"></div>
+          
+          <div class="flex items-center gap-8 text-sm text-gray-500">
+            <div class="text-center">
+              <div class="text-2xl font-serif font-medium text-gray-900">2.4k</div>
+              <div class="text-xs">Subscribers</div>
+            </div>
+            <div class="text-center">
+              <div class="text-2xl font-serif font-medium text-gray-900">156</div>
+              <div class="text-xs">Stories</div>
+            </div>
+            <div class="text-center">
+              <div class="text-2xl font-serif font-medium text-gray-900">12</div>
+              <div class="text-xs">Contributors</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="border-t border-gray-100 bg-gray-50/50">
+      <div class="max-w-7xl mx-auto px-6 py-8">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500">
+          
+          <div class="flex items-center gap-2">
+            <span>&copy; 2025 DevNewsletter. Made with</span>
+            <Heart class="w-4 h-4 text-red-500 fill-current animate-pulse" />
+            <span>by developers, for developers.</span>
+          </div>
+          
+          <div class="flex items-center gap-6">
+            <a href="/privacy" class="hover:text-gray-700 transition-colors duration-300">Privacy</a>
+            <a href="/terms" class="hover:text-gray-700 transition-colors duration-300">Terms</a>
+            <a href="/cookies" class="hover:text-gray-700 transition-colors duration-300">Cookies</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </footer>
