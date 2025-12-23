@@ -1,10 +1,43 @@
 ---
 import AdminLayout from "../../layouts/AdminLayout.astro";
+export const prerender = false;
 ---
 
 <AdminLayout>
-  <h1 class="text-3xl">
-    Welcome back
-    <span class="font-bold text-gray-900"> Dave </span>
-  </h1>
+  <div class="p-6">
+    <h1 class="text-3xl font-semibold mb-4">Admin</h1>
+    <div id="adminContent">Loading…</div>
+  </div>
+
+  <script>
+    (async function(){
+      const API_BASE = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:3000';
+      const getToken = () => {
+        try { const t = localStorage.getItem('token'); if (t) return t; } catch(e) {}
+        const m = document.cookie.match(/(?:^|; )token=([^;]+)/);
+        if (m) return decodeURIComponent(m[1]);
+        return null;
+      };
+
+      const token = getToken();
+      const adminContent = document.getElementById('adminContent');
+      if (!token) {
+        if (adminContent) adminContent.textContent = 'Not logged in';
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API_BASE}/admin/me`, { headers: { Authorization: `Bearer ${token}` } });
+        if (!res.ok) {
+          if (adminContent) adminContent.textContent = 'Unauthorized';
+          return;
+        }
+        const me = await res.json();
+        if (adminContent) adminContent.innerHTML = `Logged in as <strong>${me.email}</strong>`;
+      } catch (err) {
+        if (adminContent) adminContent.textContent = 'Error loading admin info';
+        console.error('Admin fetch error', err);
+      }
+    })();
+  </script>
 </AdminLayout>
