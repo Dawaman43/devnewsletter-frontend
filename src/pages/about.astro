@@ -1,0 +1,113 @@
+---
+import Layout from '../layouts/Layout.astro'
+
+const title = 'About'
+const description = 'Learn more about Dawit Worku, the creator behind this newsletter.'
+---
+
+<Layout title={title} description={description}>
+  <header class="page-header">
+    <h1>{title}</h1>
+    <p>{description}</p>
+  </header>
+
+  <section class="about-content">
+    <div class="about-text">
+      <p>
+        Hi, I'm <strong>Dawit Worku</strong>, a passionate developer and tech enthusiast. I created this newsletter to share practical tips, tutorials, and insights for fellow developers who love building and shipping great software.
+      </p>
+      <p>
+        With years of experience in web development, I focus on modern tools and frameworks that help streamline the development process. Whether it's the latest in JavaScript, backend technologies, or productivity hacks, I aim to provide concise, actionable content that you can use right away.
+      </p>
+      <p>
+        When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or sharing knowledge with the community. I believe in continuous learning and helping others grow in their tech journeys.
+      </p>
+      <p>
+        Thanks for being part of this community! If you have questions, suggestions, or just want to connect, feel free to reach out.
+      </p>
+    </div>
+
+    <div class="about-links">
+      <a href="https://dawitworku.tech" target="_blank" rel="noopener" class="cta-button">
+        Visit My Website
+      </a>
+      <a href="/contact" class="secondary-link">
+        Get in Touch
+      </a>
+    </div>
+  </section>
+
+  <style>
+    .page-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .page-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .page-header p {
+      font-size: 1.2rem;
+      color: var(--color-gray-600);
+    }
+
+    .about-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .about-text {
+      margin-bottom: 2rem;
+    }
+
+    .about-text p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      color: var(--color-gray-700);
+    }
+
+    .about-text strong {
+      color: var(--color-primary);
+    }
+
+    .about-links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .cta-button {
+      background: var(--color-primary);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    .cta-button:hover {
+      background: var(--color-primary-dark);
+    }
+
+    .secondary-link {
+      color: var(--color-primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .secondary-link:hover {
+      text-decoration: underline;
+    }
+
+    @media (min-width: 768px) {
+      .about-links {
+        flex-direction: row;
+        justify-content: center;
+      }
+    }
+  </style>
+</Layout>
