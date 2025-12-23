@@ -7,7 +7,7 @@ const postsData = await response.json();
 const newPosts = postsData.map((post: any) => ({
   id: post.id,
   title: post.title,
-  excerpt: "Read the full article to discover more.", // Placeholder since content not included in list
+  excerpt: "Read the full article to discover more.", 
   date: post.created_at.split('T')[0],
   readTime: "5 min read",
   category: "General", 
@@ -45,10 +45,10 @@ const categoryColors = {
       </div>
       
       <a
-        href="/archive"
+        href="/newsletters"
         class="group inline-flex items-center gap-3 text-sm font-medium text-gray-500 hover:text-gray-900 transition-all duration-500 px-6 py-3 rounded-2xl hover:bg-gray-50"
       >
-        Browse all stories
+        Browse all newsletters
         <ArrowRight class="w-4 h-4 transition-all duration-500 group-hover:translate-x-2" />
       </a>
     </div>
