@@ -1,5 +1,5 @@
 ---
-import { Pen, Github, Search, Sun, Moon } from '@lucide/astro';
+import { Pen, Github, Search } from '@lucide/astro';
 import HeaderQuote from './HeaderQuote.astro'
 export let showQuote = false;
 ---
@@ -66,11 +66,11 @@ export let showQuote = false;
           </div>
         </div>
 
-        <!-- Desktop theme toggle -->
-        <button id="theme-toggle" aria-label="Toggle theme" class="hidden md:inline-flex items-center justify-center ml-3 w-10 h-10 rounded-lg bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700">
-          <Sun class="sun-icon w-5 h-5 text-amber-500" />
-          <Moon class="moon-icon w-5 h-5 text-indigo-400" />
-        </button>
+        <!-- Contribute (GitHub) -->
+        <a href="https://github.com/Dawaman43/devnewsletter-frontend" target="_blank" rel="noopener" title="Contribute on GitHub" class="hidden md:inline-flex items-center gap-2 ml-3 px-3 py-2 rounded-lg bg-amber-600 text-white hover:bg-amber-500 transition-colors shadow-sm">
+          <Github class="w-5 h-5 text-white stroke-[2]" />
+          <span class="text-sm font-semibold">Contribute</span>
+        </a>
 
 </header>
 
@@ -105,11 +105,10 @@ export let showQuote = false;
 
         <div class="mt-6 border-t border-gray-100 dark:border-zinc-800/50 pt-4 flex items-center justify-between">
           <div class="flex items-center gap-3">
-            <button id="mobile-theme-toggle" aria-label="Toggle theme" class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700">
-              <Sun class="sun-icon w-5 h-5 text-amber-500" />
-              <Moon class="moon-icon w-5 h-5 text-indigo-400" />
-            </button>
-            <a href="https://github.com/Dawaman43/devnewsletter-frontend" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg bg-gray-900 text-white text-sm">GitHub</a>
+            <a href="https://github.com/Dawaman43/devnewsletter-frontend" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg bg-amber-600 text-white text-sm hover:bg-amber-500 transition-colors flex items-center gap-2">
+              <Github class="w-4 h-4 text-white stroke-[2]" />
+              <span>GitHub</span>
+            </a>
           </div>
           <a href="mailto:dawitworkujima@gmail.com" class="text-sm text-gray-600 dark:text-zinc-400">Contact</a>
         </div>
@@ -117,13 +116,7 @@ export let showQuote = false;
     </div>
   </div>
 
-<style>
-  /* Theme Toggle Icon Animations (restored) */
-  .sun-icon { transform: rotate(0) scale(1); opacity: 1; }
-  .moon-icon { transform: rotate(90deg) scale(0); opacity: 0; }
-  :global(.dark) .sun-icon { transform: rotate(-90deg) scale(0); opacity: 0; }
-  :global(.dark) .moon-icon { transform: rotate(0) scale(1); opacity: 1; }
-</style>
+<!-- removed theme icon styles -->
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
@@ -132,15 +125,8 @@ export let showQuote = false;
     const suggestionsBox = document.getElementById('search-suggestions');
     const suggestionsList = document.getElementById('suggestions-list');
     const apiBase = searchContainer?.dataset.apiBase;
-    const themeToggle = document.getElementById('theme-toggle');
     const mobileToggle = document.getElementById('mobile-menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
-
-    themeToggle?.addEventListener('click', () => {
-        document.documentElement.classList.toggle('dark');
-        const isDark = document.documentElement.classList.contains('dark');
-        localStorage.theme = isDark ? 'dark' : 'light';
-    });
 
     // Mobile menu toggle
     mobileToggle?.addEventListener('click', () => {
@@ -165,14 +151,7 @@ export let showQuote = false;
       document.body.classList.remove('overflow-hidden');
     });
 
-    // Mobile theme toggle within menu (sun/moon icons)
-    const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
-    mobileThemeToggle?.addEventListener('click', () => {
-      document.documentElement.classList.toggle('dark');
-      const isDark = document.documentElement.classList.contains('dark');
-      localStorage.theme = isDark ? 'dark' : 'light';
-      // toggle icon visibility via CSS classes already defined for .sun-icon and .moon-icon
-    });
+    // mobile theme toggle removed
 
     // Desktop search behaviour (kept as before)
     if (searchInput) {
