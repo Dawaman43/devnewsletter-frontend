@@ -57,7 +57,39 @@ const extractImage = (content) => {
 ---
 
 <Layout title="DevNewsletter - Stay Updated with Developer News" showHero={true}>
-  
+
+  <!-- Hero (SEO: H1 + expanded content) -->
+  <section class="hero-section py-16">
+    <div class="container text-center">
+      <h1 class="text-4xl md:text-5xl font-serif font-black leading-tight mb-6">DevNewsletter — concise developer news, tips, and practical tutorials</h1>
+
+      <div class="mx-auto max-w-3xl text-left prose">
+        <p>
+          DevNewsletter delivers short, actionable developer news and practical tutorials every week. Our goal is to help engineers and makers stay current without drowning in noise: you get concise explanations, tools and libraries worth trying, debugging notes from real projects, and short post-mortems that highlight what worked (and what didn't). Whether you're shipping products, experimenting with new stacks, or leading a small team, these notes are written so you can read them between tasks and actually apply them.
+        </p>
+
+        <p>
+          Each issue includes curated links, a short tutorial or code snippet, and a few mental-model style reflections designed to improve your day-to-day engineering decisions. We emphasize clarity and usefulness: clear examples, minimal jargon, and links to dive deeper when you want. Subscribe to receive the weekly digest in your inbox and browse past issues for quick reference.
+        </p>
+
+        <p>
+          Highlights: performance tips, accessibility reminders, small refactors that pay off, CLI tricks, and short post-mortems from real shipping stories. We keep the reading time under five minutes per issue so it actually fits into a busy schedule.
+        </p>
+
+        <div class="mt-6 flex items-center gap-3">
+          <a href="/newsletters" class="px-6 py-3 bg-amber-500 text-white rounded-xl font-bold">Subscribe — Free</a>
+          <div class="ml-4 text-sm text-gray-600">No spam • Unsubscribe anytime</div>
+        </div>
+      </div>
+
+      <!-- Social share (lightweight links) -->
+      <div class="mt-8 flex items-center justify-center gap-3">
+        <a id="share-twitter" class="px-4 py-2 rounded-md bg-sky-500 text-white text-sm font-bold" href="#" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + '&url=' + encodeURIComponent(window.location.href),'_blank','width=600,height=400'); return false;">Share on X</a>
+        <a id="share-linkedin" class="px-4 py-2 rounded-md bg-blue-700 text-white text-sm font-bold" href="#" onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(window.location.href),'_blank','width=800,height=600'); return false;">Share on LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
   <!-- Top Stories Section -->
   {topPosts.length > 0 && (
     <section class="top-stories-section py-20 bg-amber-50/20 dark:bg-amber-900/5">

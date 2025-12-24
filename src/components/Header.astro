@@ -22,41 +22,36 @@ export let showQuote = false;
       
       <!-- Logo Section -->
       <div class="flex items-center justify-between lg:justify-start gap-4">
-        <a href="/" class="group flex items-center gap-3 md:gap-4 flex-shrink-0">
-          <div class="p-2.5 md:p-3 bg-amber-50 dark:bg-amber-900/20 rounded-2xl border border-amber-100 dark:border-amber-800/30 transition-transform group-hover:rotate-3 duration-300">
-              <Pen class="h-7 w-7 md:h-9 md:w-9 text-amber-600 dark:text-amber-500" />
-          </div>
-          <div class="flex flex-col">
-            <span class="text-2xl md:text-3xl font-serif font-extrabold tracking-tight text-gray-900 dark:text-white leading-tight">
-              DevNewsletter
-            </span>
-            <span class="text-[10px] md:text-xs font-bold text-amber-600 dark:text-amber-500 tracking-wider uppercase">
-              The Creative Developer
-            </span>
-          </div>
-        </a>
+            <a href="/" class="group flex items-center gap-3 md:gap-4 flex-shrink-0">
+              <div class="p-2 md:p-2.5 bg-amber-50 dark:bg-amber-900/20 rounded-2xl border border-amber-100 dark:border-amber-800/30 transition-transform group-hover:rotate-3 duration-300">
+                  <Pen class="h-6 w-6 md:h-9 md:w-9 text-amber-600 dark:text-amber-500" />
+              </div>
+              <div class="flex flex-col">
+                <span class="text-xl md:text-2xl font-serif font-extrabold tracking-tight text-gray-900 dark:text-white leading-tight">
+                  DevNewsletter
+                </span>
+                <span class="text-[10px] md:text-xs font-bold text-amber-600 dark:text-amber-500 tracking-wider uppercase">
+                  The Creative Developer
+                </span>
+              </div>
+            </a>
 
-        <!-- Mobile-only controls? No, we'll keep them in the main flow but maybe reorder -->
-      </div>
+            <!-- Mobile hamburger -->
+            <button id="mobile-menu-toggle" aria-label="Open menu" class="md:hidden inline-flex items-center justify-center p-2 rounded-lg bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700/50">
+              <svg class="w-6 h-6 text-gray-800 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
+          </div>
 
       <!-- Search and Controls -->
       <div class="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-auto">
         
-        <div class="relative group w-full sm:flex-1 lg:w-80 z-50" id="search-container" data-api-base={import.meta.env.VITE_API_BASE_URL}>
+        <div class="relative group w-full sm:flex-1 lg:w-80 z-50 hidden md:block" id="search-container" data-api-base={import.meta.env.VITE_API_BASE_URL}>
           <Search class="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 dark:text-zinc-500 group-focus-within:text-amber-600 transition-colors z-10" />
           <input
             type="search"
             id="header-search"
             placeholder="Search stories..."
-            class="w-full pl-11 pr-12 py-3
-                   bg-gray-50 dark:bg-zinc-900/50 
-                   border border-gray-200 dark:border-zinc-700/50
-                   rounded-xl 
-                   text-gray-900 dark:text-white 
-                   placeholder-gray-400 dark:placeholder-zinc-500
-                   text-sm font-sans
-                   focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500
-                   shadow-sm transition-all duration-300"
+            class="w-full pl-11 pr-12 py-3 bg-gray-50 dark:bg-zinc-900/50 border border-gray-200 dark:border-zinc-700/50 rounded-xl text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-zinc-500 text-sm font-sans focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 shadow-sm transition-all duration-300"
             aria-label="Search the newsletter"
             autocomplete="off"
           />
@@ -71,74 +66,69 @@ export let showQuote = false;
           </div>
         </div>
 
-        <div class="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-start">
-            <button
-            id="theme-toggle"
-            class="group flex items-center justify-center w-11 h-11 rounded-xl 
-                    bg-gray-50 dark:bg-zinc-900/50 
-                    border border-gray-200 dark:border-zinc-700/50
-                    hover:border-amber-300 dark:hover:border-amber-700
-                    hover:bg-white dark:hover:bg-zinc-800
-                    shadow-sm transition-all duration-300 cursor-pointer overflow-hidden"
-            aria-label="Toggle Dark Mode"
-            >
-                <div class="relative w-5 h-5">
-                    <Sun class="sun-icon absolute inset-0 h-5 w-5 text-amber-500 transition-all duration-500" />
-                    <Moon class="moon-icon absolute inset-0 h-5 w-5 text-indigo-400 transition-all duration-500" />
-                </div>
-            </button>
+</header>
 
-            <a
-            href="https://github.com/Dawaman43/devnewsletter-frontend"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 rounded-xl 
-                    bg-gray-900 dark:bg-white 
-                    text-white dark:text-zinc-950 
-                    px-5 py-3 
-                    text-sm font-bold 
-                    hover:bg-gray-800 dark:hover:bg-zinc-100
-                    hover:shadow-lg transition-all duration-300"
-            >
-            <Github class="h-4 w-4" />
-            <span>Star</span>
-            </a>
+  <!-- Mobile menu overlay + panel (outside header for proper stacking) -->
+  <div id="mobile-menu" class="fixed inset-0 z-[9999] hidden">
+    <div id="mobile-menu-overlay" class="absolute inset-0 bg-black/40 dark:bg-black/50 z-[9998]"></div>
+    <div class="relative z-[10000] h-full w-full md:hidden flex justify-end">
+      <div class="h-full max-w-sm w-full bg-white dark:bg-zinc-900 p-4 overflow-auto shadow-lg">
+        <div class="flex items-center justify-between mb-6">
+          <a href="/" class="flex items-center gap-3">
+            <div class="p-2 bg-amber-50 dark:bg-amber-900/20 rounded-lg border border-amber-100 dark:border-amber-800/30">
+              <Pen class="h-6 w-6 text-amber-600 dark:text-amber-500" />
+            </div>
+            <span class="text-base font-serif font-extrabold text-gray-900 dark:text-white">DevNewsletter</span>
+          </a>
+          <button id="mobile-menu-close" aria-label="Close menu" class="p-2 rounded-lg bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700">
+            <svg class="w-5 h-5 text-gray-800 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+
+        <div class="mb-6">
+          <input id="mobile-search" type="search" placeholder="Search stories..." class="w-full pl-4 pr-4 py-3 rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 text-gray-900 dark:text-white" />
+        </div>
+
+        <nav class="flex flex-col gap-4">
+          <a href="/posts" class="px-4 py-3 rounded-lg hover:bg-amber-50 dark:hover:bg-amber-900/10">Latest Stories</a>
+          <a href="/categories" class="px-4 py-3 rounded-lg hover:bg-amber-50 dark:hover:bg-amber-900/10">Categories</a>
+          <a href="/newsletters" class="px-4 py-3 rounded-lg hover:bg-amber-50 dark:hover:bg-amber-900/10">Subscribe</a>
+          <a href="/contributors" class="px-4 py-3 rounded-lg hover:bg-amber-50 dark:hover:bg-amber-900/10">Contributors</a>
+          <a href="/about" class="px-4 py-3 rounded-lg hover:bg-amber-50 dark:hover:bg-amber-900/10">About</a>
+        </nav>
+
+        <div class="mt-6 border-t border-gray-100 dark:border-zinc-800/50 pt-4 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <button id="mobile-theme-toggle" aria-label="Toggle theme" class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700">
+              <Sun class="sun-icon w-5 h-5 text-amber-500" />
+              <Moon class="moon-icon w-5 h-5 text-indigo-400" />
+            </button>
+            <a href="https://github.com/Dawaman43/devnewsletter-frontend" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg bg-gray-900 text-white text-sm">GitHub</a>
+          </div>
+          <a href="mailto:dawitworkujima@gmail.com" class="text-sm text-gray-600 dark:text-zinc-400">Contact</a>
         </div>
       </div>
     </div>
-
-    {showQuote && <div class="mt-8 border-t border-gray-100 dark:border-zinc-800/50 pt-8"><HeaderQuote /></div>}
   </div>
-</header>
 
 <style>
-  /* Theme Toggle Icon Animations */
-  .sun-icon {
-    transform: rotate(0) scale(1);
-    opacity: 1;
-  }
-  .moon-icon {
-    transform: rotate(90deg) scale(0);
-    opacity: 0;
-  }
-
-  :global(.dark) .sun-icon {
-    transform: rotate(-90deg) scale(0);
-    opacity: 0;
-  }
-  :global(.dark) .moon-icon {
-    transform: rotate(0) scale(1);
-    opacity: 1;
-  }
+  /* Theme Toggle Icon Animations (restored) */
+  .sun-icon { transform: rotate(0) scale(1); opacity: 1; }
+  .moon-icon { transform: rotate(90deg) scale(0); opacity: 0; }
+  :global(.dark) .sun-icon { transform: rotate(-90deg) scale(0); opacity: 0; }
+  :global(.dark) .moon-icon { transform: rotate(0) scale(1); opacity: 1; }
 </style>
 
 <script>
+  document.addEventListener('DOMContentLoaded', function() {
     const searchContainer = document.getElementById('search-container');
-    const searchInput = document.getElementById('header-search') as HTMLInputElement;
+    const searchInput = document.getElementById('header-search');
     const suggestionsBox = document.getElementById('search-suggestions');
     const suggestionsList = document.getElementById('suggestions-list');
     const apiBase = searchContainer?.dataset.apiBase;
     const themeToggle = document.getElementById('theme-toggle');
+    const mobileToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
 
     themeToggle?.addEventListener('click', () => {
         document.documentElement.classList.toggle('dark');
@@ -146,73 +136,98 @@ export let showQuote = false;
         localStorage.theme = isDark ? 'dark' : 'light';
     });
 
-    let debounceTimer: any;
+    // Mobile menu toggle
+    mobileToggle?.addEventListener('click', () => {
+      if (!mobileMenu) return;
+      mobileMenu.classList.toggle('hidden');
+      document.body.classList.toggle('overflow-hidden');
+    });
 
-    searchInput?.addEventListener('input', (e) => {
-      clearTimeout(debounceTimer);
-      const query = (e.target as HTMLInputElement).value;
+    // Mobile menu close button
+    const mobileClose = document.getElementById('mobile-menu-close');
+    mobileClose?.addEventListener('click', () => {
+      if (!mobileMenu) return;
+      mobileMenu.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+    });
 
-      if (query.trim().length === 0) {
-        suggestionsBox?.classList.add('hidden');
-        return;
-      }
+    // Close when clicking outside the panel (overlay)
+    const mobileOverlay = document.getElementById('mobile-menu-overlay');
+    mobileOverlay?.addEventListener('click', () => {
+      if (!mobileMenu) return;
+      mobileMenu.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+    });
 
-      debounceTimer = setTimeout(async () => {
-        try {
-          const res = await fetch(`${apiBase}/api/search?q=${encodeURIComponent(query)}&limit=5`);
-          if (!res.ok) throw new Error('Search failed');
-          const data = await res.json();
-          
-          if (data.posts && data.posts.length > 0) {
-            suggestionsList!.innerHTML = data.posts.map((post: any) => `
-              <li>
-                <a href="/posts/${post.id}" class="flex items-center gap-3 p-2.5 rounded-lg hover:bg-amber-50 dark:hover:bg-amber-900/10 transition-colors group">
-                   <div class="p-1.5 bg-white dark:bg-zinc-800 rounded border border-gray-100 dark:border-zinc-700">
-                      <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                      </svg>
-                   </div>
-                   <div class="min-w-0 flex-1">
-                      <div class="text-xs font-bold text-gray-900 dark:text-white truncate uppercase tracking-tight">${post.title}</div>
-                      <div class="text-[10px] text-gray-500 dark:text-zinc-500 uppercase tracking-widest mt-0.5">Read Post &rarr;</div>
-                   </div>
-                </a>
-              </li>
-            `).join('') + `
-              <li class="pt-2 mt-2 border-t border-gray-100 dark:border-zinc-800">
-                <a href="/search?q=${encodeURIComponent(query)}" class="block w-full py-2 text-center text-xs font-bold text-amber-600 dark:text-amber-500 hover:bg-amber-50 dark:hover:bg-amber-900/10 rounded transition-colors uppercase tracking-widest">
-                  View all results
-                </a>
-              </li>
-            `;
-            suggestionsBox?.classList.remove('hidden');
-          } else {
-            suggestionsList!.innerHTML = `<li class="p-4 text-center text-xs text-gray-500 font-bold uppercase tracking-widest">No stories found</li>`;
-            suggestionsBox?.classList.remove('hidden');
-          }
-        } catch (err) {
-          console.error('Search error:', err);
-           suggestionsBox?.classList.add('hidden');
+    // Mobile theme toggle within menu (sun/moon icons)
+    const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+    mobileThemeToggle?.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      const isDark = document.documentElement.classList.contains('dark');
+      localStorage.theme = isDark ? 'dark' : 'light';
+      // toggle icon visibility via CSS classes already defined for .sun-icon and .moon-icon
+    });
+
+    // Desktop search behaviour (kept as before)
+    if (searchInput) {
+      let debounceTimer;
+      searchInput.addEventListener('input', (e) => {
+        clearTimeout(debounceTimer);
+        const query = e.target.value;
+        if (!query || query.trim().length === 0) {
+          suggestionsBox?.classList.add('hidden');
+          return;
         }
-      }, 300);
-    });
+        debounceTimer = setTimeout(async () => {
+          try {
+            const res = await fetch(`${apiBase}/api/search?q=${encodeURIComponent(query)}&limit=5`);
+            if (!res.ok) throw new Error('Search failed');
+            const data = await res.json();
+            if (data.posts && data.posts.length > 0) {
+              suggestionsList.innerHTML = data.posts.map(post => `
+                <li>
+                  <a href="/posts/${post.id}" class="flex items-center gap-3 p-2.5 rounded-lg hover:bg-amber-50 dark:hover:bg-amber-900/10 transition-colors group">
+                     <div class="p-1.5 bg-white dark:bg-zinc-800 rounded border border-gray-100 dark:border-zinc-700">
+                        <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                     </div>
+                     <div class="min-w-0 flex-1">
+                        <div class="text-xs font-bold text-gray-900 dark:text-white truncate uppercase tracking-tight">${post.title}</div>
+                        <div class="text-[10px] text-gray-500 dark:text-zinc-500 uppercase tracking-widest mt-0.5">Read Post &rarr;</div>
+                     </div>
+                  </a>
+                </li>
+              `).join('') + `
+                <li class="pt-2 mt-2 border-t border-gray-100 dark:border-zinc-800">
+                  <a href="/search?q=${encodeURIComponent(query)}" class="block w-full py-2 text-center text-xs font-bold text-amber-600 dark:text-amber-500 hover:bg-amber-50 dark:hover:bg-amber-900/10 rounded transition-colors uppercase tracking-widest">View all results</a>
+                </li>`;
+              suggestionsBox?.classList.remove('hidden');
+            } else {
+              suggestionsList.innerHTML = `<li class="p-4 text-center text-xs text-gray-500 font-bold uppercase tracking-widest">No stories found</li>`;
+              suggestionsBox?.classList.remove('hidden');
+            }
+          } catch (err) {
+            console.error('Search error:', err);
+            suggestionsBox?.classList.add('hidden');
+          }
+        }, 300);
+      });
 
-    document.addEventListener('click', (e) => {
-      if (!searchContainer?.contains(e.target as Node)) {
-        suggestionsBox?.classList.add('hidden');
-      }
-    });
+      document.addEventListener('click', (e) => {
+        if (!searchContainer?.contains(e.target)) {
+          suggestionsBox?.classList.add('hidden');
+        }
+      });
 
-    searchInput?.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        window.location.href = `/search?q=${encodeURIComponent(searchInput.value)}`;
-      }
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault();
-        searchInput?.focus();
-      }
-    });
-  </script>
+      searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          window.location.href = `/search?q=${encodeURIComponent(searchInput.value)}`;
+        }
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+          e.preventDefault();
+        }
+      });
+    }
+  });
+</script>
