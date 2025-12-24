@@ -1,5 +1,5 @@
 import { f as createComponent, k as renderComponent, r as renderTemplate, m as maybeRenderHead, h as addAttribute } from '../chunks/astro/server_DXpmQ0xB.mjs';
-import { $ as $$Layout } from '../chunks/Layout_CINh4aUI.mjs';
+import { $ as $$Layout } from '../chunks/Layout_D5fmrAe4.mjs';
 export { renderers } from '../renderers.mjs';
 
 const prerender = false;

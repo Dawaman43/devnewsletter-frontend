@@ -1,11 +1,11 @@
 import { e as createAstro, f as createComponent, k as renderComponent, r as renderTemplate, m as maybeRenderHead, h as addAttribute, n as renderScript, u as unescapeHTML } from '../../chunks/astro/server_DXpmQ0xB.mjs';
-import { $ as $$Layout } from '../../chunks/Layout_CINh4aUI.mjs';
+import { $ as $$Layout } from '../../chunks/Layout_D5fmrAe4.mjs';
 import { marked } from 'marked';
 import hljs from 'highlight.js';
 /* empty css                                   */
 export { renderers } from '../../renderers.mjs';
 
-const $$Astro = createAstro("http://localhost:4321");
+const $$Astro = createAstro("https://devnews-nu.vercel.app");
 const prerender = false;
 const $$id = createComponent(async ($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro, $$props, $$slots);

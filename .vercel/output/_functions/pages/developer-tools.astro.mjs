@@ -1,5 +1,5 @@
 import { e as createAstro, f as createComponent, k as renderComponent, r as renderTemplate, m as maybeRenderHead } from '../chunks/astro/server_DXpmQ0xB.mjs';
-import { c as createLucideIcon, $ as $$Layout } from '../chunks/Layout_CINh4aUI.mjs';
+import { c as createLucideIcon, $ as $$Layout } from '../chunks/Layout_D5fmrAe4.mjs';
 export { renderers } from '../renderers.mjs';
 
 const Atom = createLucideIcon("atom", [["circle", { "cx": "12", "cy": "12", "r": "1" }], ["path", { "d": "M20.2 20.2c2.04-2.03.02-7.36-4.5-11.9-4.54-4.52-9.87-6.54-11.9-4.5-2.04 2.03-.02 7.36 4.5 11.9 4.54 4.52 9.87 6.54 11.9 4.5Z" }], ["path", { "d": "M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5Z" }]]);
@@ -20,7 +20,7 @@ const Terminal = createLucideIcon("terminal", [["path", { "d": "M12 19h8" }], ["
 
 const Zap = createLucideIcon("zap", [["path", { "d": "M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" }]]);
 
-const $$Astro = createAstro("http://localhost:4321");
+const $$Astro = createAstro("https://devnews-nu.vercel.app");
 const $$DeveloperTools = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro, $$props, $$slots);
   Astro2.self = $$DeveloperTools;

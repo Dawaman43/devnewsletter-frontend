@@ -1,5 +1,5 @@
 import { f as createComponent, k as renderComponent, r as renderTemplate, l as defineScriptVars, m as maybeRenderHead } from '../../chunks/astro/server_DXpmQ0xB.mjs';
-import { $ as $$AdminLayout } from '../../chunks/AdminLayout_BFt6wXvG.mjs';
+import { $ as $$AdminLayout } from '../../chunks/AdminLayout_BNdV-RCA.mjs';
 /* empty css                                    */
 export { renderers } from '../../renderers.mjs';
 

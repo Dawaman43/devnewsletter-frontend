@@ -1,12 +1,12 @@
 import { e as createAstro, f as createComponent, k as renderComponent, r as renderTemplate, l as defineScriptVars, m as maybeRenderHead } from '../../../chunks/astro/server_DXpmQ0xB.mjs';
-import { $ as $$AdminLayout } from '../../../chunks/AdminLayout_BFt6wXvG.mjs';
+import { $ as $$AdminLayout } from '../../../chunks/AdminLayout_BNdV-RCA.mjs';
 export { renderers } from '../../../renderers.mjs';
 
 var __freeze = Object.freeze;
 var __defProp = Object.defineProperty;
 var __template = (cooked, raw) => __freeze(__defProp(cooked, "raw", { value: __freeze(raw || cooked.slice()) }));
 var _a;
-const $$Astro = createAstro("http://localhost:4321");
+const $$Astro = createAstro("https://devnews-nu.vercel.app");
 const prerender = false;
 const $$id = createComponent(async ($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro, $$props, $$slots);

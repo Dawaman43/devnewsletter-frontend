@@ -6,7 +6,7 @@ import sitemap from '@astrojs/sitemap'
 
 // https://astro.build/config
 export default defineConfig({
-    site: 'http://localhost:4321', // Replace with your production domain
+    site: 'https://devnews-nu.vercel.app', // Using the domain from Vercel logs
     vite: {
         plugins: [tailwindcss()],
 

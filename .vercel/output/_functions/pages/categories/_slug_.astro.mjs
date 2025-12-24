@@ -1,9 +1,9 @@
 import { e as createAstro, f as createComponent, k as renderComponent, r as renderTemplate, m as maybeRenderHead, q as Fragment, h as addAttribute } from '../../chunks/astro/server_DXpmQ0xB.mjs';
-import { $ as $$Layout } from '../../chunks/Layout_CINh4aUI.mjs';
+import { $ as $$Layout } from '../../chunks/Layout_D5fmrAe4.mjs';
 /* empty css                                     */
 export { renderers } from '../../renderers.mjs';
 
-const $$Astro = createAstro("http://localhost:4321");
+const $$Astro = createAstro("https://devnews-nu.vercel.app");
 const prerender = false;
 const $$slug = createComponent(async ($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro, $$props, $$slots);
