@@ -16,20 +16,25 @@ const $$id = createComponent(async ($$result, $$props, $$slots) => {
   let error = null;
   let htmlContent = "";
   try {
-    const res = await fetch(`${API_BASE}/api/posts/${id}`);
-    if (!res.ok) throw new Error("Post not found");
-    post = await res.json();
-    marked.setOptions({
-      highlight: function(code, lang) {
-        if (lang && hljs.getLanguage(lang)) {
-          return hljs.highlight(code, { language: lang }).value;
-        }
-        return hljs.highlightAuto(code).value;
-      },
-      breaks: true,
-      gfm: true
-    });
-    htmlContent = marked.parse(post.content);
+    const res = await fetch(`${API_BASE}/api/posts/${id}`).catch(() => null);
+    if (res?.ok) {
+      post = await res.json();
+      marked.setOptions({
+        highlight: function(code, lang) {
+          if (lang && hljs.getLanguage(lang)) {
+            return hljs.highlight(code, { language: lang }).value;
+          }
+          return hljs.highlightAuto(code).value;
+        },
+        breaks: true,
+        gfm: true
+      });
+      if (post?.content) {
+        htmlContent = marked.parse(post.content);
+      }
+    } else {
+      throw new Error("Post not found or API unreachable");
+    }
   } catch (e) {
     error = e.message;
   }

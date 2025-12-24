@@ -10,20 +10,30 @@ let categories = [];
 
 try {
   const [postsRes, topRes, adminRes, catsRes] = await Promise.all([
-    fetch(`${API_BASE}/api/posts?limit=6`),
-    fetch(`${API_BASE}/api/posts/top?limit=4`),
-    fetch(`${API_BASE}/api/posts/admin-picks?limit=4`),
-    fetch(`${API_BASE}/api/categories`)
+    fetch(`${API_BASE}/api/posts?limit=6`).catch(() => null),
+    fetch(`${API_BASE}/api/posts/top?limit=4`).catch(() => null),
+    fetch(`${API_BASE}/api/posts/admin-picks?limit=4`).catch(() => null),
+    fetch(`${API_BASE}/api/categories`).catch(() => null)
   ]);
   
-  const postsData = await postsRes.json();
-  const topData = await topRes.json();
-  const adminData = await adminRes.json();
+  if (postsRes?.ok) {
+    const postsData = await postsRes.json();
+    posts = postsData.posts || [];
+  }
   
-  posts = postsData.posts;
-  topPosts = topData.posts || [];
-  adminPicks = adminData.posts || [];
-  categories = await catsRes.json();
+  if (topRes?.ok) {
+    const topData = await topRes.json();
+    topPosts = topData.posts || [];
+  }
+  
+  if (adminRes?.ok) {
+    const adminData = await adminRes.json();
+    adminPicks = adminData.posts || [];
+  }
+  
+  if (catsRes?.ok) {
+    categories = await catsRes.json() || [];
+  }
 } catch (err) {
   console.error('Failed to load data:', err);
 }
