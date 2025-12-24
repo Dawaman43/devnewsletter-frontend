@@ -12,8 +12,8 @@ const { title = "Admin" } = Astro.props;
   </head>
   <body class="bg-gray-50">
     <div class="flex h-screen">
-      <!-- Sidebar -->
-      <aside class="w-64 bg-white border-r border-gray-200">
+      <!-- Sidebar (hidden on small screens) -->
+      <aside id="adminSidebar" class="w-64 bg-white border-r border-gray-200 hidden md:block">
         <div class="p-6 border-b border-gray-200">
           <h1 class="text-xl font-bold text-gray-900">Admin Panel</h1>
         </div>
@@ -49,6 +49,15 @@ const { title = "Admin" } = Astro.props;
 
       <!-- Main content -->
       <main class="flex-1 overflow-auto">
+        <!-- Mobile topbar -->
+        <div class="md:hidden p-4 flex items-center justify-between border-b border-gray-200 bg-white">
+          <button id="sidebarToggle" aria-label="Open sidebar" class="p-2 rounded-md bg-gray-100">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+          <h1 class="text-lg font-semibold">Admin</h1>
+          <div></div>
+        </div>
+
         <div class="p-8">
           <slot />
         </div>
@@ -78,6 +87,14 @@ const { title = "Admin" } = Astro.props;
           document.cookie = 'token=; path=/; max-age=0';
           window.location.href = '/admin/login';
         });
+
+        // Sidebar toggle for mobile
+        const sidebar = document.getElementById('adminSidebar');
+        const toggle = document.getElementById('sidebarToggle');
+        toggle?.addEventListener('click', () => {
+          if (!sidebar) return;
+          sidebar.classList.toggle('hidden');
+        });
       })();
     </script>
   </body>
@@ -104,5 +121,20 @@ const { title = "Admin" } = Astro.props;
   .nav-link.active {
     background-color: #3b82f6;
     color: white;
+  }
+
+  /* Responsive adjustments for mobile sidebar */
+  @media (max-width: 767px) {
+    #adminSidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      z-index: 50;
+      width: 16rem;
+      overflow-y: auto;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      background: white;
+    }
   }
 </style>

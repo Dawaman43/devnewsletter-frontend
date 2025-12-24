@@ -1,3 +1,10 @@
 {
-    "outputDirectory": ".vercel/output"
+    "outputDirectory": ".vercel/output",
+    "redirects": [
+        {
+            "source": "/admin",
+            "destination": "https://admin.devnews-nu.vercel.app/",
+            "permanent": false
+        }
+    ]
 }
