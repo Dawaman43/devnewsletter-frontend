@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:3000';
+console.log('SSR fetch using API_BASE:', API_BASE);
 
 let posts = [];
 let topPosts = [];
@@ -39,6 +40,7 @@ try {
 }
 
 const formatExcerpt = (content) => {
+  if (!content) return '';
   const text = content
     .replace(/!\[.*?\]\(.*?\)/g, '')
     .replace(/[#*`]/g, '')
@@ -48,6 +50,7 @@ const formatExcerpt = (content) => {
 };
 
 const extractImage = (content) => {
+  if (!content) return null;
   const match = content.match(/!\[.*?\]\((.*?)\)/);
   return match ? match[1] : null;
 };

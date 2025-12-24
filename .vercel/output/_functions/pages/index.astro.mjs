@@ -1,10 +1,11 @@
 import { f as createComponent, k as renderComponent, r as renderTemplate, m as maybeRenderHead, h as addAttribute } from '../chunks/astro/server_DXpmQ0xB.mjs';
-import { $ as $$Layout } from '../chunks/Layout_Cauy4deL.mjs';
+import { $ as $$Layout } from '../chunks/Layout_CINh4aUI.mjs';
 /* empty css                                 */
 export { renderers } from '../renderers.mjs';
 
 const $$Index = createComponent(async ($$result, $$props, $$slots) => {
   const API_BASE = "http://localhost:3000";
+  console.log("SSR fetch using API_BASE:", API_BASE);
   let posts = [];
   let topPosts = [];
   let adminPicks = [];
@@ -35,10 +36,12 @@ const $$Index = createComponent(async ($$result, $$props, $$slots) => {
     console.error("Failed to load data:", err);
   }
   const formatExcerpt = (content) => {
+    if (!content) return "";
     const text = content.replace(/!\[.*?\]\(.*?\)/g, "").replace(/[#*`]/g, "").replace(/\n+/g, " ").trim();
     return text.length > 0 ? text.substring(0, 150) + "..." : "";
   };
   const extractImage = (content) => {
+    if (!content) return null;
     const match = content.match(/!\[.*?\]\((.*?)\)/);
     return match ? match[1] : null;
   };

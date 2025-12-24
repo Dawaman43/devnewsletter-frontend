@@ -19,9 +19,9 @@ const defaultAttributes = {
   "stroke-linejoin": "round"
 };
 
-const $$Astro$2 = createAstro("http://localhost:4321");
+const $$Astro$1 = createAstro("http://localhost:4321");
 const $$Icon = createComponent(($$result, $$props, $$slots) => {
-  const Astro2 = $$result.createAstro($$Astro$2, $$props, $$slots);
+  const Astro2 = $$result.createAstro($$Astro$1, $$props, $$slots);
   Astro2.self = $$Icon;
   const {
     color = "currentColor",
@@ -143,15 +143,6 @@ Reject
 </button> </div> </div> </div> ${renderScript($$result, "/home/dave/Documents/devnewsletter/newsletter/src/components/ConsentBanner.astro?astro&type=script&index=0&lang.ts")} `;
 }, "/home/dave/Documents/devnewsletter/newsletter/src/components/ConsentBanner.astro", void 0);
 
-const $$Astro$1 = createAstro("http://localhost:4321");
-const $$Index = createComponent(($$result, $$props, $$slots) => {
-  const Astro2 = $$result.createAstro($$Astro$1, $$props, $$slots);
-  Astro2.self = $$Index;
-  const propsStr = JSON.stringify(Astro2.props);
-  const paramsStr = JSON.stringify(Astro2.params);
-  return renderTemplate`${renderComponent($$result, "vercel-analytics", "vercel-analytics", { "data-props": propsStr, "data-params": paramsStr, "data-pathname": Astro2.url.pathname })} ${renderScript($$result, "/home/dave/Documents/devnewsletter/newsletter/node_modules/.pnpm/@vercel+analytics@1.6.1/node_modules/@vercel/analytics/dist/astro/index.astro?astro&type=script&index=0&lang.ts")}`;
-}, "/home/dave/Documents/devnewsletter/newsletter/node_modules/.pnpm/@vercel+analytics@1.6.1/node_modules/@vercel/analytics/dist/astro/index.astro", void 0);
-
 var __freeze = Object.freeze;
 var __defProp = Object.defineProperty;
 var __template = (cooked, raw) => __freeze(__defProp(cooked, "raw", { value: __freeze(cooked.slice()) }));
@@ -175,7 +166,7 @@ const $$Layout = createComponent(($$result, $$props, $$slots) => {
         } else {
             document.documentElement.classList.remove('dark')
         }
-    <\/script>`, '</head> <body class="antialiased" data-astro-cid-sckkx6r4> ', ' <main class="relative" data-astro-cid-sckkx6r4> ', " </main> ", " ", " ", " ", " </body> </html>"])), title, addAttribute(description, "content"), addAttribute(canonicalURL, "href"), addAttribute(canonicalURL, "content"), addAttribute(title, "content"), addAttribute(description, "content"), addAttribute(new URL(image, Astro2.url).toString(), "content"), addAttribute(canonicalURL, "content"), addAttribute(title, "content"), addAttribute(description, "content"), renderHead(), renderComponent($$result, "Header", $$Header, { "showQuote": showHeaderQuote, "data-astro-cid-sckkx6r4": true }), renderSlot($$result, $$slots["default"]), renderComponent($$result, "Footer", $$Footer, { "data-astro-cid-sckkx6r4": true }), renderComponent($$result, "ConsentBanner", $$ConsentBanner, { "data-astro-cid-sckkx6r4": true }), renderComponent($$result, "Analytics", $$Index, { "data-astro-cid-sckkx6r4": true }), renderScript($$result, "/home/dave/Documents/devnewsletter/newsletter/src/layouts/Layout.astro?astro&type=script&index=0&lang.ts"));
+    <\/script>`, '</head> <body class="antialiased" data-astro-cid-sckkx6r4> ', ' <main class="relative" data-astro-cid-sckkx6r4> ', " </main> ", " ", " ", " </body> </html>"])), title, addAttribute(description, "content"), addAttribute(canonicalURL, "href"), addAttribute(canonicalURL, "content"), addAttribute(title, "content"), addAttribute(description, "content"), addAttribute(new URL(image, Astro2.url).toString(), "content"), addAttribute(canonicalURL, "content"), addAttribute(title, "content"), addAttribute(description, "content"), renderHead(), renderComponent($$result, "Header", $$Header, { "showQuote": showHeaderQuote, "data-astro-cid-sckkx6r4": true }), renderSlot($$result, $$slots["default"]), renderComponent($$result, "Footer", $$Footer, { "data-astro-cid-sckkx6r4": true }), renderComponent($$result, "ConsentBanner", $$ConsentBanner, { "data-astro-cid-sckkx6r4": true }), renderScript($$result, "/home/dave/Documents/devnewsletter/newsletter/src/layouts/Layout.astro?astro&type=script&index=0&lang.ts"));
 }, "/home/dave/Documents/devnewsletter/newsletter/src/layouts/Layout.astro", void 0);
 
 export { $$Layout as $, createLucideIcon as c };

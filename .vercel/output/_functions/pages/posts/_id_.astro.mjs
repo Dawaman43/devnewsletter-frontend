@@ -1,5 +1,5 @@
 import { e as createAstro, f as createComponent, k as renderComponent, r as renderTemplate, m as maybeRenderHead, h as addAttribute, n as renderScript, u as unescapeHTML } from '../../chunks/astro/server_DXpmQ0xB.mjs';
-import { $ as $$Layout } from '../../chunks/Layout_Cauy4deL.mjs';
+import { $ as $$Layout } from '../../chunks/Layout_CINh4aUI.mjs';
 import { marked } from 'marked';
 import hljs from 'highlight.js';
 /* empty css                                   */
