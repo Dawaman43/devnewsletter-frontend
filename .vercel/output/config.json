@@ -1,0 +1,103 @@
+{
+	"version": 3,
+	"routes": [
+		{
+			"handle": "filesystem"
+		},
+		{
+			"src": "^/_astro/(.*)$",
+			"headers": {
+				"cache-control": "public, max-age=31536000, immutable"
+			},
+			"continue": true
+		},
+		{
+			"src": "^/_server-islands/([^/]+?)/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/_image/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/about/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/admin/categories/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/admin/login/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/admin/posts/new/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/admin/posts/preview/([^/]+?)/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/admin/posts/([^/]+?)/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/admin/posts/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/admin/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/archive/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/categories/([^/]+?)/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/categories/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/contributors/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/developer-tools/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/newsletters/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/posts/([^/]+?)/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/posts/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/privacy/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/search/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/terms/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/$",
+			"dest": "_render"
+		}
+	]
+}

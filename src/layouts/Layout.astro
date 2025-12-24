@@ -2,6 +2,7 @@
 import Header from "../components/Header.astro"
 import Footer from "../components/Footer.astro"
 import ConsentBanner from "../components/ConsentBanner.astro"
+import Analytics from '@vercel/analytics/astro'
 import "../styles/global.css"
 
 interface Props {
@@ -235,6 +236,7 @@ const canonicalURL = Astro.props.canonicalURL || Astro.url.href;
     
     <Footer />
     <ConsentBanner />
+    <Analytics />
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {

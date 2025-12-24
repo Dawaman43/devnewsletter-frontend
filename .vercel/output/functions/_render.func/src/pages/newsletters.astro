@@ -1,0 +1,45 @@
+
+---
+import Layout from '../layouts/Layout.astro'
+export const prerender = false;
+
+const API_BASE = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:3000';
+let posts = [];
+try {
+	const res = await fetch(`${API_BASE}/posts`);
+	if (res.ok) posts = await res.json();
+	else posts = [];
+} catch (e) {
+	posts = [];
+}
+---
+
+<Layout showHero={false}>
+	<section class="max-w-7xl mx-auto px-6 py-16">
+		<header class="mb-12 text-center">
+			<h1 class="text-4xl font-serif font-medium text-gray-900">All Newsletters</h1>
+			<p class="text-gray-600 mt-3">Browse every edition — short, practical notes for builders.</p>
+		</header>
+
+		{posts && posts.length > 0 ? (
+			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+				{posts.map((post: any) => (
+					<article class="group bg-white rounded-2xl p-6 shadow hover:shadow-lg transition">
+						<a href={`/posts/${post.id}`} class="no-underline">
+							<h2 class="text-xl font-serif text-gray-900 mb-2">{post.title}</h2>
+						</a>
+						<div class="text-sm text-gray-500 mb-4">{new Date(post.created_at).toLocaleDateString()}</div>
+						<p class="text-gray-700 mb-6">{post.excerpt ?? 'Short summary not available.'}</p>
+						<div class="flex items-center justify-between">
+							<a href={`/posts/${post.id}`} class="text-sm text-amber-600 font-medium hover:underline">Read</a>
+							<div class="text-xs text-gray-400">{post.readTime ?? '5 min'}</div>
+						</div>
+					</article>
+				))}
+			</div>
+		) : (
+			<div class="text-center text-gray-600">No newsletters found.</div>
+		)}
+	</section>
+</Layout>
+

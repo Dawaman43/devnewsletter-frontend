@@ -1,0 +1,82 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Privacy Policy - DevNewsletter">
+  <div class="legal-page py-20">
+    <div class="container max-w-3xl mx-auto px-6">
+      <header class="mb-16 text-center">
+        <h1 class="text-4xl md:text-5xl font-serif font-black mb-4">Privacy Policy</h1>
+        <p class="text-gray-500 dark:text-zinc-500 font-serif italic">Last Updated: December 24, 2025</p>
+        <div class="h-1 w-20 bg-amber-500 mx-auto mt-8 rounded-full"></div>
+      </header>
+
+      <div class="prose dark:prose-invert prose-amber max-w-none">
+        <section class="mb-12">
+          <h2 class="text-2xl font-serif font-bold mb-4">1. Information We Collect</h2>
+          <p class="text-lg leading-relaxed mb-4">
+            At DevNewsletter, we value your privacy. We only collect the information necessary to provide you with our weekly newsletter:
+          </p>
+          <ul class="list-disc pl-6 space-y-2 mb-4">
+            <li><strong>Email Address:</strong> Primarily for sending the newsletter and identifying your subscription.</li>
+            <li><strong>Usage Data:</strong> We track basic interactions (like views) to improve our content.</li>
+          </ul>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-2xl font-serif font-bold mb-4">2. How We Use Data</h2>
+          <p class="text-lg leading-relaxed mb-4">
+            We use the collected information to:
+          </p>
+          <ul class="list-disc pl-6 space-y-2 mb-4">
+            <li>Deliver weekly dev notes and insights directly to your inbox.</li>
+            <li>Analyze trending topics (powering our "Top Stories" section).</li>
+            <li>Communicate important updates regarding the service.</li>
+          </ul>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-2xl font-serif font-bold mb-4">3. Data Security</h2>
+          <p class="text-lg leading-relaxed mb-4">
+            We implement security measures to protect your email address. We do not sell, trade, or otherwise transfer your personally identifiable information to outside parties.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-2xl font-serif font-bold mb-4">4. Third Parties</h2>
+          <p class="text-lg leading-relaxed mb-4">
+            We may use third-party services like Cloudinary for image hosting or standard analytics tools. These parties have their own privacy policies.
+          </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl font-serif font-bold mb-4">5. Contact Us</h2>
+            <p class="text-lg leading-relaxed">
+              If you have any questions about this Privacy Policy, please reach out via our social channels.
+            </p>
+        </section>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .legal-page {
+    background: var(--bg-body);
+    min-height: 100vh;
+  }
+  
+  h2 {
+    color: var(--text-heading);
+    margin-top: 2rem;
+  }
+  
+  p, li {
+    color: var(--text-main);
+    line-height: 1.8;
+  }
+
+  strong {
+    color: var(--color-primary);
+  }
+</style>

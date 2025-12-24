@@ -1,0 +1,86 @@
+import { e as createAstro, f as createComponent, k as renderComponent, r as renderTemplate, m as maybeRenderHead } from '../chunks/astro/server_DXpmQ0xB.mjs';
+import { c as createLucideIcon, $ as $$Layout } from '../chunks/Layout_Cauy4deL.mjs';
+export { renderers } from '../renderers.mjs';
+
+const Atom = createLucideIcon("atom", [["circle", { "cx": "12", "cy": "12", "r": "1" }], ["path", { "d": "M20.2 20.2c2.04-2.03.02-7.36-4.5-11.9-4.54-4.52-9.87-6.54-11.9-4.5-2.04 2.03-.02 7.36 4.5 11.9 4.54 4.52 9.87 6.54 11.9 4.5Z" }], ["path", { "d": "M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5Z" }]]);
+
+const Box = createLucideIcon("box", [["path", { "d": "M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" }], ["path", { "d": "m3.3 7 8.7 5 8.7-5" }], ["path", { "d": "M12 22V12" }]]);
+
+const Code = createLucideIcon("code", [["path", { "d": "m16 18 6-6-6-6" }], ["path", { "d": "m8 6-6 6 6 6" }]]);
+
+const GitBranch = createLucideIcon("git-branch", [["line", { "x1": "6", "x2": "6", "y1": "3", "y2": "15" }], ["circle", { "cx": "18", "cy": "6", "r": "3" }], ["circle", { "cx": "6", "cy": "18", "r": "3" }], ["path", { "d": "M18 9a9 9 0 0 1-9 9" }]]);
+
+const Palette = createLucideIcon("palette", [["path", { "d": "M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z" }], ["circle", { "cx": "13.5", "cy": "6.5", "r": ".5", "fill": "currentColor" }], ["circle", { "cx": "17.5", "cy": "10.5", "r": ".5", "fill": "currentColor" }], ["circle", { "cx": "6.5", "cy": "12.5", "r": ".5", "fill": "currentColor" }], ["circle", { "cx": "8.5", "cy": "7.5", "r": ".5", "fill": "currentColor" }]]);
+
+const Rocket = createLucideIcon("rocket", [["path", { "d": "M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" }], ["path", { "d": "m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" }], ["path", { "d": "M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" }], ["path", { "d": "M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" }]]);
+
+const Send = createLucideIcon("send", [["path", { "d": "M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" }], ["path", { "d": "m21.854 2.147-10.94 10.939" }]]);
+
+const Terminal = createLucideIcon("terminal", [["path", { "d": "M12 19h8" }], ["path", { "d": "m4 17 6-6-6-6" }]]);
+
+const Zap = createLucideIcon("zap", [["path", { "d": "M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" }]]);
+
+const $$Astro = createAstro("http://localhost:4321");
+const $$DeveloperTools = createComponent(($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro, $$props, $$slots);
+  Astro2.self = $$DeveloperTools;
+  const title = "Developer Tools";
+  const description = "Curated collection of essential tools for developers \u2014 editors, frameworks, utilities, and more.";
+  return renderTemplate`${renderComponent($$result, "Layout", $$Layout, { "title": title, "description": description }, { "default": ($$result2) => renderTemplate` ${maybeRenderHead()}<header class="relative overflow-hidden bg-gradient-to-b from-amber-50/50 to-transparent py-20"> <div class="max-w-7xl mx-auto px-6 text-center"> <h1 class="text-5xl md:text-6xl font-serif font-medium text-gray-900 mb-6">
+Developer Tools
+</h1> <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"> ${description} </p> </div> </header> <section class="max-w-7xl mx-auto px-6 py-16"> <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"> <article class="group relative bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2"> <div class="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-orange-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div> <div class="relative p-8"> <div class="flex items-center justify-between mb-6"> <div class="p-4 bg-amber-100 rounded-2xl group-hover:bg-amber-200 transition-colors duration-300"> ${renderComponent($$result2, "Code", Code, { "class": "w-10 h-10 text-amber-700" })} </div> <span class="px-4 py-2 bg-amber-100 text-amber-800 text-xs font-medium rounded-full">Editor</span> </div> <h3 class="text-2xl font-serif font-medium text-gray-900 mb-3">VS Code</h3> <p class="text-gray-600 leading-relaxed mb-8">
+The most popular code editor with extensive extensions and customization options.
+</p> <a href="https://code.visualstudio.com/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-amber-700 font-medium group-hover:gap-4 transition-all duration-300">
+Download
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path> </svg> </a> </div> </article> <article class="group relative bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2"> <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-teal-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div> <div class="relative p-8"> <div class="flex items-center justify-between mb-6"> <div class="p-4 bg-emerald-100 rounded-2xl group-hover:bg-emerald-200 transition-colors duration-300"> ${renderComponent($$result2, "Terminal", Terminal, { "class": "w-10 h-10 text-emerald-700" })} </div> <span class="px-4 py-2 bg-emerald-100 text-emerald-800 text-xs font-medium rounded-full">Editor</span> </div> <h3 class="text-2xl font-serif font-medium text-gray-900 mb-3">Neovim</h3> <p class="text-gray-600 leading-relaxed mb-8">
+A hyperextensible Vim-based text editor focused on usability and extensibility.
+</p> <a href="https://neovim.io/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-emerald-700 font-medium group-hover:gap-4 transition-all duration-300">
+Get Neovim
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path> </svg> </a> </div> </article> <article class="group relative bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2"> <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-indigo-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div> <div class="relative p-8"> <div class="flex items-center justify-between mb-6"> <div class="p-4 bg-purple-100 rounded-2xl group-hover:bg-purple-200 transition-colors duration-300"> ${renderComponent($$result2, "Zap", Zap, { "class": "w-10 h-10 text-purple-700" })} </div> <span class="px-4 py-2 bg-purple-100 text-purple-800 text-xs font-medium rounded-full">Editor</span> </div> <h3 class="text-2xl font-serif font-medium text-gray-900 mb-3">Zed</h3> <p class="text-gray-600 leading-relaxed mb-8">
+A high-performance, multiplayer code editor designed for speed and collaboration.
+</p> <a href="https://zed.dev/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-purple-700 font-medium group-hover:gap-4 transition-all duration-300">
+Try Zed
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path> </svg> </a> </div> </article> <article class="group relative bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2"> <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div> <div class="relative p-8"> <div class="flex items-center justify-between mb-6"> <div class="p-4 bg-blue-100 rounded-2xl group-hover:bg-blue-200 transition-colors duration-300"> ${renderComponent($$result2, "GitBranch", GitBranch, { "class": "w-10 h-10 text-blue-700" })} </div> <span class="px-4 py-2 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">Version Control</span> </div> <h3 class="text-2xl font-serif font-medium text-gray-900 mb-3">Git</h3> <p class="text-gray-600 leading-relaxed mb-8">
+Distributed version control system for tracking changes in source code.
+</p> <a href="https://git-scm.com/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-blue-700 font-medium group-hover:gap-4 transition-all duration-300">
+Learn More
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path> </svg> </a> </div> </article> <article class="group relative bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2"> <div class="absolute inset-0 bg-gradient-to-br from-green-500/5 to-lime-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div> <div class="relative p-8"> <div class="flex items-center justify-between mb-6"> <div class="p-4 bg-green-100 rounded-2xl group-hover:bg-green-200 transition-colors duration-300"> ${renderComponent($$result2, "Zap", Zap, { "class": "w-10 h-10 text-green-700" })} </div> <span class="px-4 py-2 bg-green-100 text-green-800 text-xs font-medium rounded-full">Runtime</span> </div> <h3 class="text-2xl font-serif font-medium text-gray-900 mb-3">Node.js</h3> <p class="text-gray-600 leading-relaxed mb-8">
+JavaScript runtime built on Chrome's V8 JavaScript engine.
+</p> <a href="https://nodejs.org/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-green-700 font-medium group-hover:gap-4 transition-all duration-300">
+Get Started
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path> </svg> </a> </div> </article> <article class="group relative bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2"> <div class="absolute inset-0 bg-gradient-to-br from-pink-500/5 to-rose-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div> <div class="relative p-8"> <div class="flex items-center justify-between mb-6"> <div class="p-4 bg-pink-100 rounded-2xl group-hover:bg-pink-200 transition-colors duration-300"> ${renderComponent($$result2, "Atom", Atom, { "class": "w-10 h-10 text-pink-700" })} </div> <span class="px-4 py-2 bg-pink-100 text-pink-800 text-xs font-medium rounded-full">Framework</span> </div> <h3 class="text-2xl font-serif font-medium text-gray-900 mb-3">React</h3> <p class="text-gray-600 leading-relaxed mb-8">
+A JavaScript library for building user interfaces.
+</p> <a href="https://reactjs.org/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-pink-700 font-medium group-hover:gap-4 transition-all duration-300">
+Documentation
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path> </svg> </a> </div> </article> <article class="group relative bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2"> <div class="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-amber-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div> <div class="relative p-8"> <div class="flex items-center justify-between mb-6"> <div class="p-4 bg-orange-100 rounded-2xl group-hover:bg-orange-200 transition-colors duration-300"> ${renderComponent($$result2, "Rocket", Rocket, { "class": "w-10 h-10 text-orange-700" })} </div> <span class="px-4 py-2 bg-orange-100 text-orange-800 text-xs font-medium rounded-full">Framework</span> </div> <h3 class="text-2xl font-serif font-medium text-gray-900 mb-3">Astro</h3> <p class="text-gray-600 leading-relaxed mb-8">
+Build fast websites with less client-side JavaScript. This site is built with Astro!
+</p> <a href="https://astro.build/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-orange-700 font-medium group-hover:gap-4 transition-all duration-300">
+Explore
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path> </svg> </a> </div> </article> <article class="group relative bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2"> <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div> <div class="relative p-8"> <div class="flex items-center justify-between mb-6"> <div class="p-4 bg-indigo-100 rounded-2xl group-hover:bg-indigo-200 transition-colors duration-300"> ${renderComponent($$result2, "Send", Send, { "class": "w-10 h-10 text-indigo-700" })} </div> <span class="px-4 py-2 bg-indigo-100 text-indigo-800 text-xs font-medium rounded-full">API Testing</span> </div> <h3 class="text-2xl font-serif font-medium text-gray-900 mb-3">Postman</h3> <p class="text-gray-600 leading-relaxed mb-8">
+API development environment for designing, testing, and iterating APIs.
+</p> <a href="https://www.postman.com/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-indigo-700 font-medium group-hover:gap-4 transition-all duration-300">
+Try It
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path> </svg> </a> </div> </article> <article class="group relative bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2"> <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-teal-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div> <div class="relative p-8"> <div class="flex items-center justify-between mb-6"> <div class="p-4 bg-cyan-100 rounded-2xl group-hover:bg-cyan-200 transition-colors duration-300"> ${renderComponent($$result2, "Box", Box, { "class": "w-10 h-10 text-cyan-700" })} </div> <span class="px-4 py-2 bg-cyan-100 text-cyan-800 text-xs font-medium rounded-full">Containerization</span> </div> <h3 class="text-2xl font-serif font-medium text-gray-900 mb-3">Docker</h3> <p class="text-gray-600 leading-relaxed mb-8">
+Platform for developing, shipping, and running applications in containers.
+</p> <a href="https://www.docker.com/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-cyan-700 font-medium group-hover:gap-4 transition-all duration-300">
+Get Docker
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path> </svg> </a> </div> </article> <article class="group relative bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2"> <div class="absolute inset-0 bg-gradient-to-br from-violet-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div> <div class="relative p-8"> <div class="flex items-center justify-between mb-6"> <div class="p-4 bg-violet-100 rounded-2xl group-hover:bg-violet-200 transition-colors duration-300"> ${renderComponent($$result2, "Palette", Palette, { "class": "w-10 h-10 text-violet-700" })} </div> <span class="px-4 py-2 bg-violet-100 text-violet-800 text-xs font-medium rounded-full">Design</span> </div> <h3 class="text-2xl font-serif font-medium text-gray-900 mb-3">Figma</h3> <p class="text-gray-600 leading-relaxed mb-8">
+Collaborative interface design tool for teams.
+</p> <a href="https://www.figma.com/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-violet-700 font-medium group-hover:gap-4 transition-all duration-300">
+Design Now
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path> </svg> </a> </div> </article> </div> </section> ` })}`;
+}, "/home/dave/Documents/devnewsletter/newsletter/src/pages/developer-tools.astro", void 0);
+
+const $$file = "/home/dave/Documents/devnewsletter/newsletter/src/pages/developer-tools.astro";
+const $$url = "/developer-tools";
+
+const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+  __proto__: null,
+  default: $$DeveloperTools,
+  file: $$file,
+  url: $$url
+}, Symbol.toStringTag, { value: 'Module' }));
+
+const page = () => _page;
+
+export { page };

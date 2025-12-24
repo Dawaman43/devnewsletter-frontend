@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import icon from 'astro-icon'
-import node from '@astrojs/node'
+import vercel from '@astrojs/vercel'
 import sitemap from '@astrojs/sitemap'
 
 // https://astro.build/config
@@ -13,5 +13,9 @@ export default defineConfig({
     },
     integrations: [icon(), sitemap()],
     output: 'server',
-    adapter: node({ mode: 'standalone' }),
+    adapter: vercel({
+        webAnalytics: {
+            enabled: true,
+        },
+    }),
 });
