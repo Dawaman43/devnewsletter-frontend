@@ -102,12 +102,9 @@ const structuredData = JSON.stringify({
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
     <script is:inline>
-        // Dark mode init
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark')
-        } else {
-            document.documentElement.classList.remove('dark')
-        }
+        // Force dark mode for all pages by default
+        document.documentElement.classList.add('dark')
+        try { localStorage.theme = 'dark' } catch (e) { /* ignore */ }
     </script>
 
     <style>
