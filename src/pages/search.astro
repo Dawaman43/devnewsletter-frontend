@@ -1,9 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-export const prerender = true;
-
-const API_BASE = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:3000';
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
 const query = Astro.url.searchParams.get('q') || '';
 const page = parseInt(Astro.url.searchParams.get('page') || '1');
 const limit = 10;
@@ -14,10 +12,20 @@ let error = null;
 
 if (query) {
   try {
-    const res = await fetch(`${API_BASE}/api/search?q=${encodeURIComponent(query)}&limit=${limit}&offset=${offset}`);
-    results = await res.json();
+    const endpoint = API_BASE && API_BASE.length > 0
+      ? `${API_BASE}/api/search?q=${encodeURIComponent(query)}&limit=${limit}&offset=${offset}`
+      : `/api/search?q=${encodeURIComponent(query)}&limit=${limit}&offset=${offset}`;
+
+    const res = await fetch(endpoint);
+    if (!res.ok) {
+      error = `Search request failed (${res.status})`;
+      results = { posts: [], total: 0 };
+    } else {
+      results = await res.json();
+    }
   } catch (err) {
     error = "Failed to fetch search results.";
+    results = { posts: [], total: 0 };
   }
 }
 
@@ -41,7 +49,7 @@ const extractImage = (content) => {
 ---
 
 <Layout title={`Search: ${query} — DevNewsletter`}>
-  <div class="max-w-4xl mx-auto px-6 py-16">
+  <div id="search-results" data-api-base="${API_BASE}" class="max-w-4xl mx-auto px-6 py-16">
     <header class="mb-12">
       <h1 class="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-4">
         Search Results
@@ -57,74 +65,134 @@ const extractImage = (content) => {
       </div>
     )}
 
-    {!query ? (
-      <div class="text-center py-20 bg-gray-50 rounded-3xl border border-dashed border-gray-300">
-        <p class="text-gray-500 font-serif text-lg">Type something in the search bar above to start.</p>
-      </div>
-    ) : results.posts.length === 0 ? (
-      <div class="text-center py-20 bg-gray-50 rounded-3xl border border-dashed border-gray-300">
-        <p class="text-gray-500 font-serif text-lg">No results found for "{query}". Try different keywords.</p>
-      </div>
-    ) : (
-      <div class="space-y-12">
-        {results.posts.map((post: any) => {
-          const image = extractImage(post.content);
-          return (
-            <article class="group relative flex flex-col md:flex-row gap-8 items-start">
-              {image && (
-                <div class="w-full md:w-48 h-48 flex-shrink-0 overflow-hidden rounded-2xl shadow-lg group-hover:shadow-xl transition-all duration-300">
-                  <img src={image} alt={post.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+    <div id="search-render-target">
+      { /* Server-rendered content appears here; client script will hydrate if needed */ }
+      {!query ? (
+        <div class="text-center py-20 bg-gray-50 rounded-3xl border border-dashed border-gray-300">
+          <p class="text-gray-500 font-serif text-lg">Type something in the search bar above to start.</p>
+        </div>
+      ) : results.posts.length === 0 ? (
+        <div class="text-center py-20 bg-gray-50 rounded-3xl border border-dashed border-gray-300">
+          <p class="text-gray-500 font-serif text-lg">No results found for "{query}". Try different keywords.</p>
+        </div>
+      ) : (
+        <div class="space-y-12">
+          {results.posts.map((post: any) => {
+            const image = extractImage(post.content);
+            return (
+              <article class="group relative flex flex-col md:flex-row gap-8 items-start">
+                {image && (
+                  <div class="w-full md:w-48 h-48 flex-shrink-0 overflow-hidden rounded-2xl shadow-lg group-hover:shadow-xl transition-all duration-300">
+                    <img src={image} alt={post.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  </div>
+                )}
+                <div class="flex-1">
+                  <div class="flex items-center gap-3 mb-3">
+                    <span class="text-xs font-bold uppercase tracking-widest text-amber-600 bg-amber-50 px-3 py-1 rounded-full">Article</span>
+                    <time class="text-sm text-gray-400 font-medium">
+                      {new Date(post.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                    </time>
+                  </div>
+                  <h2 class="text-2xl md:text-3xl font-serif font-bold text-gray-900 mb-4 group-hover:text-amber-600 transition-colors">
+                    <a href={`/posts/${post.id}`}>{post.title}</a>
+                  </h2>
+                  <p class="text-gray-600 font-serif text-lg leading-relaxed mb-6 line-clamp-3">
+                    {formatExcerpt(post.content)}
+                  </p>
+                  <a href={`/posts/${post.id}`} class="inline-flex items-center gap-2 text-amber-600 font-bold hover:gap-3 transition-all">
+                    Read Full Story
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                  </a>
                 </div>
+              </article>
+            );
+          })}
+
+          {totalPages > 1 && (
+            <nav class="flex justify-center items-center gap-4 mt-16 pt-12 border-t border-gray-100">
+              {page > 1 && (
+                <a href={`/search?q=${encodeURIComponent(query)}&page=${page - 1}`} class="p-3 rounded-full border border-gray-200 hover:bg-amber-50 hover:border-amber-200 text-gray-600 transition-all">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                </a>
               )}
+              
+              <div class="flex gap-2">
+                {[...Array(totalPages)].map((_, i) => (
+                  <a 
+                    href={`/search?q=${encodeURIComponent(query)}&page=${i + 1}`}
+                    class={`w-12 h-12 flex items-center justify-center rounded-xl font-bold transition-all ${page === i + 1 ? 'bg-amber-600 text-white shadow-lg shadow-amber-200' : 'bg-gray-50 text-gray-600 hover:bg-gray-100 border border-gray-200'}`}
+                  >
+                    {i + 1}
+                  </a>
+                ))}
+              </div>
+
+              {page < totalPages && (
+                <a href={`/search?q=${encodeURIComponent(query)}&page=${page + 1}`} class="p-3 rounded-full border border-gray-200 hover:bg-amber-50 hover:border-amber-200 text-gray-600 transition-all">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </a>
+              )}
+            </nav>
+          )}
+        </div>
+      )}
+    </div>
+  </div>
+</Layout>
+
+<script type="module">
+  // Client-side hydration: ensure /search?q=.. shows results when server didn't
+  (function(){
+    try {
+      const container = document.getElementById('search-results');
+      if (!container) return;
+      const params = new URLSearchParams(window.location.search);
+      const q = params.get('q') || '';
+      if (!q) return;
+
+      const apiBase = container.dataset.apiBase || '';
+      const endpoint = apiBase.length > 0 ? `${apiBase}/api/search?q=${encodeURIComponent(q)}&limit=10` : `/api/search?q=${encodeURIComponent(q)}&limit=10`;
+
+      fetch(endpoint).then(res => {
+        if (!res.ok) return null;
+        return res.json();
+      }).then(data => {
+        if (!data) return;
+        const target = document.getElementById('search-render-target');
+        if (!target) return;
+        if (!data.posts || data.posts.length === 0) {
+          target.innerHTML = `<div class="text-center py-20 bg-gray-50 rounded-3xl border border-dashed border-gray-300"><p class="text-gray-500 font-serif text-lg">No results found for "${q}". Try different keywords.</p></div>`;
+          return;
+        }
+
+        const html = data.posts.map(post => {
+          const img = (post.content||'').match(/!\[.*?\]\((.*?)\)/);
+          const image = img ? img[1] : null;
+          return `
+            <article class="group relative flex flex-col md:flex-row gap-8 items-start">
+              ${image?`<div class="w-full md:w-48 h-48 flex-shrink-0 overflow-hidden rounded-2xl shadow-lg group-hover:shadow-xl transition-all duration-300"><img src="${image}" alt="${post.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" /></div>`:''}
               <div class="flex-1">
                 <div class="flex items-center gap-3 mb-3">
                   <span class="text-xs font-bold uppercase tracking-widest text-amber-600 bg-amber-50 px-3 py-1 rounded-full">Article</span>
-                  <time class="text-sm text-gray-400 font-medium">
-                    {new Date(post.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
-                  </time>
+                  <time class="text-sm text-gray-400 font-medium">${new Date(post.created_at).toLocaleDateString()}</time>
                 </div>
-                <h2 class="text-2xl md:text-3xl font-serif font-bold text-gray-900 mb-4 group-hover:text-amber-600 transition-colors">
-                  <a href={`/posts/${post.id}`}>{post.title}</a>
-                </h2>
-                <p class="text-gray-600 font-serif text-lg leading-relaxed mb-6 line-clamp-3">
-                  {formatExcerpt(post.content)}
-                </p>
-                <a href={`/posts/${post.id}`} class="inline-flex items-center gap-2 text-amber-600 font-bold hover:gap-3 transition-all">
-                  Read Full Story
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                </a>
+                <h2 class="text-2xl md:text-3xl font-serif font-bold text-gray-900 mb-4 group-hover:text-amber-600 transition-colors"><a href="/posts/${post.id}">${post.title}</a></h2>
+                <p class="text-gray-600 font-serif text-lg leading-relaxed mb-6 line-clamp-3">${(post.content||'').replace(/\n+/g,' ').slice(0,200)}...</p>
+                <a href="/posts/${post.id}" class="inline-flex items-center gap-2 text-amber-600 font-bold hover:gap-3 transition-all">Read Full Story</a>
               </div>
             </article>
-          );
-        })}
+          `;
+        }).join('');
 
-        {totalPages > 1 && (
-          <nav class="flex justify-center items-center gap-4 mt-16 pt-12 border-t border-gray-100">
-            {page > 1 && (
-              <a href={`/search?q=${encodeURIComponent(query)}&page=${page - 1}`} class="p-3 rounded-full border border-gray-200 hover:bg-amber-50 hover:border-amber-200 text-gray-600 transition-all">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-              </a>
-            )}
-            
-            <div class="flex gap-2">
-              {[...Array(totalPages)].map((_, i) => (
-                <a 
-                  href={`/search?q=${encodeURIComponent(query)}&page=${i + 1}`}
-                  class={`w-12 h-12 flex items-center justify-center rounded-xl font-bold transition-all ${page === i + 1 ? 'bg-amber-600 text-white shadow-lg shadow-amber-200' : 'bg-gray-50 text-gray-600 hover:bg-gray-100 border border-gray-200'}`}
-                >
-                  {i + 1}
-                </a>
-              ))}
-            </div>
+        let pagination = '';
+        if (data.total && data.total > 10) {
+          const pages = Math.ceil(data.total / 10);
+          const pageLinks = Array.from({length: pages}).map((_,i)=>`<a href="/search?q=${encodeURIComponent(q)}&page=${i+1}" class="px-3 py-2">${i+1}</a>`).join('');
+          pagination = `<nav class="mt-8">${pageLinks}</nav>`;
+        }
 
-            {page < totalPages && (
-              <a href={`/search?q=${encodeURIComponent(query)}&page=${page + 1}`} class="p-3 rounded-full border border-gray-200 hover:bg-amber-50 hover:border-amber-200 text-gray-600 transition-all">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-              </a>
-            )}
-          </nav>
-        )}
-      </div>
-    )}
-  </div>
-</Layout>
+        target.innerHTML = `<div class="space-y-12">${html}${pagination}</div>`;
+      }).catch(()=>{});
+    } catch (e) { console.error(e); }
+  })();
+</script>
