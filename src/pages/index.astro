@@ -11,7 +11,8 @@ try {
     fetch(`${API_BASE}/api/posts?limit=6`),
     fetch(`${API_BASE}/api/categories`)
   ]);
-  posts = await postsRes.json();
+  const postsData = await postsRes.json();
+  posts = postsData.posts;
   categories = await catsRes.json();
 } catch (err) {
   console.error('Failed to load data:', err);
@@ -34,24 +35,8 @@ const extractImage = (content) => {
 };
 ---
 
-<Layout title="DevNewsletter - Stay Updated with Developer News">
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="container">
-      <h1 class="hero-title">
-        Stay Updated with <span class="gradient-text">Developer News</span>
-      </h1>
-      <p class="hero-subtitle">
-        Curated articles, tutorials, and insights for modern developers.
-        Get the latest in web development, tools, and best practices.
-      </p>
-      <div class="hero-actions">
-        <a href="/posts" class="btn btn-primary">Browse All Posts</a>
-        <a href="/categories" class="btn btn-secondary">Explore Categories</a>
-      </div>
-    </div>
-  </section>
-
+<Layout title="DevNewsletter - Stay Updated with Developer News" showHero={true}>
+  
   <!-- Categories -->
   {categories.length > 0 && (
     <section class="categories-section">
@@ -60,7 +45,7 @@ const extractImage = (content) => {
         <div class="categories-grid">
           {categories.map(cat => (
             <a href={`/categories/${cat.slug}`} class="category-card">
-              <span class="category-icon">📁</span>
+              <span class="category-icon text-2xl group-hover:scale-125 transition-transform duration-300">📁</span>
               <span class="category-name">{cat.name}</span>
             </a>
           ))}
@@ -70,11 +55,14 @@ const extractImage = (content) => {
   )}
 
   <!-- Latest Posts -->
-  <section class="posts-section">
+  <section class="posts-section" id="latest">
     <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Latest Posts</h2>
-        <a href="/posts" class="view-all">View All &rarr;</a>
+      <div class="section-header flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-12">
+        <h2 class="section-title !mb-0 text-3xl md:text-4xl font-serif font-bold tracking-tight">Latest Stories</h2>
+        <a href="/posts" class="view-all group flex items-center gap-2 px-5 py-2.5 bg-amber-50 dark:bg-amber-900/10 text-amber-600 dark:text-amber-500 rounded-full font-bold text-sm tracking-wide hover:bg-amber-100 dark:hover:bg-amber-900/20 transition-all">
+          <span>Explore All</span>
+          <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
+        </a>
       </div>
       
       {posts.length === 0 ? (
@@ -82,36 +70,48 @@ const extractImage = (content) => {
           <p>No posts yet. Check back soon!</p>
         </div>
       ) : (
-        <div class="posts-grid">
+        <div class="posts-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.map(post => (
-            <article class="post-card">
-              <div class="post-card-content">
+            <article class="post-card group">
+              <div class="post-card-content p-6 h-full flex flex-col">
                 {extractImage(post.content) && (
-                  <div class="post-image-container mb-4">
+                  <div class="post-image-container relative mb-6 aspect-video overflow-hidden rounded-xl border border-gray-100 dark:border-zinc-800">
                     <img 
                       src={extractImage(post.content)} 
                       alt={post.title}
-                      class="w-full h-48 object-cover rounded-lg"
+                      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       loading="lazy"
                     />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                   </div>
                 )}
-                <time class="post-date">
-                  {new Date(post.created_at).toLocaleDateString('en-US', {
-                    month: 'short',
-                    day: 'numeric',
-                    year: 'numeric'
-                  })}
-                </time>
-                <h3 class="post-title">
+                
+                <div class="flex items-center gap-3 mb-4">
+                    <time class="text-xs font-bold text-gray-400 dark:text-zinc-500 uppercase tracking-widest">
+                    {new Date(post.created_at).toLocaleDateString('en-US', {
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric'
+                    })}
+                    </time>
+                    <span class="w-1 h-1 bg-amber-500 rounded-full"></span>
+                    <span class="text-xs font-bold text-amber-600 dark:text-amber-500 uppercase tracking-widest">Story</span>
+                </div>
+
+                <h3 class="post-title text-2xl font-serif font-bold text-gray-900 dark:text-white mb-4 leading-tight group-hover:text-amber-600 dark:group-hover:text-amber-500 transition-colors">
                   <a href={`/posts/${post.id}`}>{post.title}</a>
                 </h3>
-                <p class="post-excerpt">
+
+                <p class="post-excerpt text-gray-600 dark:text-zinc-400 font-serif leading-relaxed mb-8 line-clamp-3">
                   {formatExcerpt(post.content)}
                 </p>
-                <a href={`/posts/${post.id}`} class="read-more">
-                  Read More &rarr;
-                </a>
+
+                <div class="mt-auto">
+                    <a href={`/posts/${post.id}`} class="read-more-btn inline-flex items-center gap-2 font-bold text-sm text-gray-900 dark:text-white tracking-widest uppercase hover:gap-3 transition-all duration-300">
+                        <span>Read Post</span>
+                        <span class="text-amber-500">&rarr;</span>
+                    </a>
+                </div>
               </div>
             </article>
           ))}
@@ -122,231 +122,122 @@ const extractImage = (content) => {
 </Layout>
 
 <style>
-  .hero {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 6rem 0;
-    text-align: center;
-  }
-
   .container {
-    max-width: 1200px;
+    max-width: 1280px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1.5rem;
   }
 
-  .hero-title {
-    font-size: 3.5rem;
-    font-weight: 800;
-    margin-bottom: 1.5rem;
-    line-height: 1.2;
-  }
-
-  .gradient-text {
-    background: linear-gradient(to right, #fbbf24, #f59e0b);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .hero-subtitle {
-    font-size: 1.25rem;
-    max-width: 700px;
-    margin: 0 auto 2.5rem;
-    opacity: 0.95;
-    line-height: 1.6;
-  }
-
-  .hero-actions {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .btn {
-    padding: 0.875rem 2rem;
-    border-radius: 0.5rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    display: inline-block;
-  }
-
-  .btn-primary {
-    background: white;
-    color: #667eea;
-  }
-
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  }
-
-  .btn-secondary {
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    border: 2px solid white;
-  }
-
-  .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: translateY(-2px);
-  }
-
+  /* Categories Section */
   .categories-section {
-    padding: 4rem 0;
-    background: #f9fafb;
+    padding: 5rem 0;
+    background: var(--color-gray-50);
+    border-bottom: 1px solid var(--color-gray-100);
+  }
+  
+  :global(.dark) .categories-section {
+    background: rgba(24, 24, 27, 0.5); /* zinc-900/50 */
+    border-bottom: 1px solid rgba(39, 39, 42, 0.5); /* zinc-800/50 */
   }
 
   .section-title {
     font-size: 2rem;
     font-weight: 700;
-    margin-bottom: 2rem;
-    color: #1f2937;
+    margin-bottom: 2.5rem;
+    color: var(--text-heading);
+    letter-spacing: -0.02em;
   }
 
   .categories-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
   }
 
   .category-card {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 1rem 1.5rem;
-    background: white;
-    border-radius: 0.75rem;
+    gap: 1rem;
+    padding: 1.25rem 1.75rem;
+    background: var(--color-gray-100);
+    border-radius: 1.25rem;
     text-decoration: none;
-    color: #374151;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
+    color: var(--text-main);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid var(--color-gray-200);
   }
 
   .category-card:hover {
-    border-color: #667eea;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+    background: white;
+    border-color: var(--color-primary);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
   }
-
-  .category-icon {
-    font-size: 1.5rem;
+  
+  :global(.dark) .category-card {
+    background: rgba(39, 39, 42, 0.8);
+    border-color: rgba(63, 63, 70, 0.5);
+  }
+  
+  :global(.dark) .category-card:hover {
+    background: #27272a;
+    border-color: var(--color-primary);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
   }
 
   .category-name {
-    font-weight: 600;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: -0.01em;
   }
 
+  /* Posts Section */
   .posts-section {
-    padding: 4rem 0;
-  }
-
-  .section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-  }
-
-  .view-all {
-    color: #667eea;
-    font-weight: 600;
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-
-  .view-all:hover {
-    color: #764ba2;
-  }
-
-  .posts-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 2rem;
+    padding: 6rem 0;
   }
 
   .post-card {
     background: white;
-    border-radius: 1rem;
+    border-radius: 1.5rem;
     overflow: hidden;
-    transition: all 0.3s ease;
-    border: 1px solid #e5e7eb;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid var(--color-gray-100);
+    height: 100%;
+  }
+  
+  :global(.dark) .post-card {
+    background: rgba(24, 24, 27, 0.8);
+    border-color: rgba(39, 39, 42, 0.8);
   }
 
   .post-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-    border-color: #667eea;
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.1);
+    border-color: var(--color-primary);
   }
-
-  .post-card-content {
-    padding: 2rem;
-  }
-
-  .post-date {
-    display: block;
-    font-size: 0.875rem;
-    color: #6b7280;
-    margin-bottom: 0.75rem;
-  }
-
-  .post-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    line-height: 1.3;
-  }
-
-  .post-title a {
-    color: #1f2937;
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-
-  .post-title a:hover {
-    color: #667eea;
-  }
-
-  .post-excerpt {
-    color: #6b7280;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-  }
-
-  .read-more {
-    color: #667eea;
-    font-weight: 600;
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-
-  .read-more:hover {
-    color: #764ba2;
+  
+  :global(.dark) .post-card:hover {
+    box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.4);
+    background: #18181b;
   }
 
   .empty-state {
     text-align: center;
-    padding: 4rem 2rem;
-    color: #6b7280;
+    padding: 6rem 2rem;
+    color: var(--color-gray-500);
+    background: var(--color-gray-50);
+    border-radius: 2rem;
+    border: 2px dashed var(--color-gray-200);
   }
 
   @media (max-width: 768px) {
-    .hero-title {
-      font-size: 2.5rem;
+    .container {
+        padding: 0 1.25rem;
     }
-
-    .hero-subtitle {
-      font-size: 1.125rem;
-    }
-
-    .posts-grid {
-      grid-template-columns: 1fr;
-    }
-
+    
     .categories-grid {
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
     }
   }
 </style>

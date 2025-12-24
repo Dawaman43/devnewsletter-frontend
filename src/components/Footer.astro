@@ -2,137 +2,111 @@
 import { ExternalLink, Coffee, Heart, Pen, Github, Mail } from '@lucide/astro';
 ---
 
-<footer class="relative overflow-hidden bg-gray-50 border-t border-gray-200/70">
-  <div class="absolute inset-0 opacity-5">
-    <div class="absolute inset-0 bg-gradient-to-br from-amber-100/30 via-transparent to-orange-100/20"></div>
+<footer class="relative overflow-hidden bg-white dark:bg-zinc-950 border-t border-gray-200 dark:border-zinc-800 transition-colors duration-300">
+  <div class="absolute inset-0 opacity-[0.02] dark:opacity-[0.01] pointer-events-none">
+    <div class="absolute inset-0 bg-gradient-to-br from-amber-500/10 via-transparent to-orange-500/10 dark:from-amber-900/10 dark:to-zinc-900/10"></div>
   </div>
 
-  <div class="relative">
-    <div class="max-w-7xl mx-auto px-6 py-20">
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
-        <div class="md:col-span-5">
-          <a 
-            href="/" 
-            class="group inline-flex items-center gap-4 mb-8 text-3xl font-serif font-medium text-gray-900 transition-all duration-500 hover:gap-6"
-          >
-            <div class="relative">
-              <Pen class="h-9 w-9 text-amber-600 transition-all duration-500 group-hover:rotate-12 group-hover:scale-110" />
-              <Pen class="absolute inset-0 h-9 w-9 text-amber-500 -rotate-12 scale-90 opacity-0 group-hover:opacity-50 transition-all duration-500" />
+  <div class="relative max-w-7xl mx-auto px-6 py-16 md:py-24">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16">
+      
+      <!-- Logo and Description -->
+      <div class="md:col-span-5">
+        <a href="/" class="group inline-flex items-center gap-4 mb-8">
+            <div class="p-2.5 bg-amber-50 dark:bg-amber-900/20 rounded-xl border border-amber-100 dark:border-amber-800/30 transition-transform group-hover:rotate-6 duration-300">
+                <Pen class="h-7 w-7 text-amber-600 dark:text-amber-500" />
             </div>
-            <span class="relative tracking-tight">
+            <span class="text-2xl font-serif font-extrabold text-gray-900 dark:text-white transition-colors">
               DevNewsletter
-              <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-600 to-orange-500 transition-all duration-700 group-hover:w-full"></span>
             </span>
+        </a>
+
+        <p class="text-gray-600 dark:text-zinc-400 font-serif text-lg leading-relaxed max-w-md mb-8">
+          Crafting stories that bridge the gap between technology and creativity—one thoughtful newsletter at a time.
+        </p>
+
+        <!-- Socials -->
+        <div class="flex items-center gap-4">
+          <a href="https://github.com/dawaman43" target="_blank" rel="noopener" class="group p-3 rounded-xl bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 hover:border-amber-500/50 transition-all duration-300" aria-label="GitHub">
+            <Github class="w-5 h-5 text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white transition-colors" />
           </a>
-
-          <p class="text-sm text-gray-500 font-medium tracking-wide mb-2">for the creative developer</p>
-
-          <p class="text-gray-700 font-serif text-lg leading-relaxed max-w-md mt-6 mb-10">
-            Crafting stories that bridge the gap between technology and creativity—one thoughtful newsletter at a time.
-          </p>
-
-          <div class="flex items-center gap-4">
-            <a
-              href="https://github.com/dawaman43"
-              target="_blank"
-              rel="noopener"
-              class="group p-3 rounded-xl bg-white/80 backdrop-blur-sm border border-gray-200 shadow-sm hover:shadow transition-all duration-300 hover:-translate-y-0.5"
-              aria-label="GitHub"
-            >
-              <Github class="w-5 h-5 text-gray-600 group-hover:text-gray-900 transition-colors" />
-            </a>
-
-            <a
-              href="https://x.com/dawitcodes"
-              target="_blank"
-              rel="noopener"
-              class="group p-3 rounded-xl bg-white/80 backdrop-blur-sm border border-gray-200 shadow-sm hover:shadow transition-all duration-300 hover:-translate-y-0.5"
-              aria-label="X (Twitter)"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-gray-600 group-hover:text-gray-900 transition-colors">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-              </svg>
-            </a>
-
-            <a
-              href="mailto:dawitworkujima@gmail.com"
-              class="group p-3 rounded-xl bg-white/80 backdrop-blur-sm border border-gray-200 shadow-sm hover:shadow transition-all duration-300 hover:-translate-y-0.5"
-              aria-label="Email"
-            >
-              <Mail class="w-5 h-5 text-gray-600 group-hover:text-gray-900 transition-colors" />
-            </a>
-          </div>
-        </div>
-
-        <div class="md:col-span-3">
-          <h4 class="text-lg font-serif font-semibold text-gray-900 mb-6">Explore</h4>
-          <nav class="space-y-3">
-            {['All Stories', 'Categories', 'Contributors', 'Developer Tools', 'Subscribe', 'About'].map((text) => (
-              <a 
-                href={`/${text.toLowerCase().replace(' ', '-')}`} 
-                class="block text-gray-600 hover:text-gray-900 font-medium transition-colors duration-300"
-              >
-                {text}
-              </a>
-            ))}
-          </nav>
-        </div>
-
-        <div class="md:col-span-4">
-          <h4 class="text-lg font-serif font-semibold text-gray-900 mb-6">Stay Connected</h4>
-          <p class="text-gray-600 mb-6 max-w-sm">
-            Fresh insights, curated tools, and inspiring stories in your inbox every week.
-          </p>
-          <form class="flex flex-col sm:flex-row gap-3 max-w-md">
-            <input 
-              type="email" 
-              placeholder="your@email.com"
-              required
-              class="flex-1 px-5 py-3.5 rounded-xl border border-gray-300 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200 bg-white/80 backdrop-blur-sm text-gray-900 placeholder-gray-500 transition-all"
-            />
-            <button 
-              type="submit"
-              class="px-7 py-3.5 bg-gradient-to-r from-amber-600 to-orange-600 text-white rounded-xl font-medium hover:shadow-md transition-all duration-300 hover:-translate-y-0.5"
-            >
-              Subscribe
-            </button>
-          </form>
-          <p class="text-xs text-gray-500 mt-3">No spam. Unsubscribe anytime.</p>
+          <a href="https://x.com/dawitcodes" target="_blank" rel="noopener" class="group p-3 rounded-xl bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 hover:border-amber-500/50 transition-all duration-300" aria-label="X">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white transition-colors">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+          </a>
+          <a href="mailto:dawitworkujima@gmail.com" class="group p-3 rounded-xl bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 hover:border-amber-500/50 transition-all duration-300" aria-label="Email">
+            <Mail class="w-5 h-5 text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white transition-colors" />
+          </a>
         </div>
       </div>
-    </div>
-    <div class="border-t border-gray-200 bg-white/60 backdrop-blur-sm">
-      <div class="max-w-7xl mx-auto px-6 py-10">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center text-center md:text-left">          <div>
-            <a
-              href="https://t.me/daw9t"
-              target="_blank"
-              rel="noopener"
-              class="group inline-flex items-center gap-3 text-gray-700 hover:text-gray-900 font-medium transition-all duration-400"
-            >
-              Chat with me on Telegram
-              <ExternalLink class="w-4 h-4 opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-            </a>
-          </div>
-          <div class="text-center md:text-right">
-            <div class="inline-flex items-center gap-2 px-5 py-2 bg-amber-50/80 rounded-full border border-amber-200/50">
-              <Coffee class="w-4 h-4 text-amber-700" />
-              <span class="text-sm font-medium text-amber-900">Support the craft</span>
-            </div>
-          </div>
-        </div>
-        <div class="mt-10 pt-8 border-t border-gray-200/70 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
-          <div class="flex items-center gap-2">
-            <span>© 2025 DevNewsletter. Made with</span>
-            <Heart class="w-4 h-4 text-red-500 fill-current animate-pulse" />
-            <span>by developers, for developers.</span>
-          </div>
 
-          <nav class="flex gap-6">
-            <a href="/privacy" class="hover:text-gray-700 transition">Privacy</a>
-            <a href="/terms" class="hover:text-gray-700 transition">Terms</a>
-            <a href="/cookies" class="hover:text-gray-700 transition">Cookies</a>
-          </nav>
+      <!-- Quick Links -->
+      <div class="md:col-span-3">
+        <h4 class="text-sm font-bold text-gray-400 dark:text-zinc-500 uppercase tracking-widest mb-8">Navigation</h4>
+        <nav class="flex flex-col gap-4">
+          {['All Stories', 'Categories', 'Contributors', 'Developer Tools', 'Subscribe', 'About'].map((text) => (
+            <a 
+              href={`/${text.toLowerCase().replace(' ', '-')}`} 
+              class="text-gray-700 dark:text-zinc-300 hover:text-amber-600 dark:hover:text-amber-400 font-medium transition-colors"
+            >
+              {text}
+            </a>
+          ))}
+        </nav>
+      </div>
+
+      <!-- Subscribe -->
+      <div class="md:col-span-4">
+        <h4 class="text-sm font-bold text-gray-400 dark:text-zinc-500 uppercase tracking-widest mb-8">Newsletter</h4>
+        <p class="text-gray-600 dark:text-zinc-400 mb-6 font-serif">
+          Fresh insights and inspiring stories in your inbox every week.
+        </p>
+        <form class="flex flex-col gap-3">
+          <input 
+            type="email" 
+            placeholder="your@email.com"
+            required
+            class="w-full px-5 py-3.5 rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900/50 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10 transition-all"
+          />
+          <button 
+            type="submit"
+            class="w-full px-6 py-3.5 bg-gray-900 dark:bg-white text-white dark:text-zinc-950 rounded-xl font-bold hover:bg-gray-800 dark:hover:bg-zinc-100 transition-all shadow-lg hover:shadow-xl active:scale-[0.98]"
+          >
+            Join Newsletter
+          </button>
+        </form>
+        <p class="text-[10px] text-gray-400 dark:text-zinc-600 uppercase tracking-widest mt-4 font-bold">Unsubscribe anytime • No spam ever</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="border-t border-gray-100 dark:border-zinc-900 bg-gray-50/50 dark:bg-zinc-950/50 backdrop-blur-sm">
+    <div class="max-w-7xl mx-auto px-6 py-10">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+        <div class="flex flex-col items-center md:items-start gap-4">
+            <a href="https://t.me/daw9t" target="_blank" rel="noopener" class="group flex items-center gap-2 text-gray-600 dark:text-zinc-400 hover:text-amber-600 transition-colors">
+                <span class="font-bold text-sm uppercase tracking-wider">Chat on Telegram</span>
+                <ExternalLink class="w-4 h-4 opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1" />
+            </a>
+            <div class="flex items-center gap-1.5 text-xs text-gray-400 dark:text-zinc-600 font-bold uppercase tracking-widest">
+                <span>© 2025</span>
+                <span class="hidden sm:inline">Made with</span>
+                <Heart class="w-3.5 h-3.5 text-red-500 fill-current mx-0.5" />
+                <span>by creators</span>
+            </div>
+        </div>
+
+        <div class="flex flex-col items-center md:items-end gap-6">
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-amber-50 dark:bg-amber-900/20 rounded-full border border-amber-100 dark:border-amber-800/30">
+                <Coffee class="w-4 h-4 text-amber-600 dark:text-amber-500" />
+                <span class="text-[10px] font-bold text-amber-800 dark:text-amber-400 uppercase tracking-widest">Support the craft</span>
+            </div>
+            <nav class="flex gap-8 text-xs font-bold text-gray-400 dark:text-zinc-600 uppercase tracking-widest">
+                <a href="/privacy" class="hover:text-gray-900 dark:hover:text-white transition-colors">Privacy</a>
+                <a href="/terms" class="hover:text-gray-900 dark:hover:text-white transition-colors">Terms</a>
+            </nav>
         </div>
       </div>
     </div>

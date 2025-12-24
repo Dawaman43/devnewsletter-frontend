@@ -8,7 +8,8 @@ let error = null;
 
 try {
   const res = await fetch(`${API_BASE}/api/posts?limit=100`);
-  posts = await res.json();
+  const data = await res.json();
+  posts = data.posts;
 } catch (err) {
   error = err.message;
 }
@@ -80,7 +81,6 @@ const extractImage = (content) => {
               Read Full Article &rarr;
             </a>
           </article>
-            </article>
           );
         })}
       </div>
