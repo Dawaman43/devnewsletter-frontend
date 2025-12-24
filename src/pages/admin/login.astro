@@ -30,15 +30,22 @@ export const prerender = true;
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ email, password })
                     });
-                    const data = await res.json();
-                    if (res.ok && data.token) {
+                    let dataText = '';
+                    let data = null;
+                    try {
+                        dataText = await res.text();
+                        try { data = JSON.parse(dataText); } catch(e){ data = null; }
+                    } catch (e) { data = null; }
+
+                    if (res.ok && data && data.token) {
                         localStorage.setItem('token', data.token);
                         console.debug('stored token', data.token.slice(0,20));
                         // set cookie as fallback for SSR checks
                         document.cookie = `token=${encodeURIComponent(data.token)}; path=/`;
                         window.location.href = '/admin';
                     } else {
-                        alert(data.error || 'Login failed');
+                        console.error('Login failed', res.status, data || dataText);
+                        alert((data && (data.error || data.message)) || dataText || `Login failed (status ${res.status})`);
                     }
                 } catch (err) {
                     alert('Login failed');
