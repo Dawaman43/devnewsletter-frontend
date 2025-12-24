@@ -24,31 +24,11 @@
 			"dest": "_render"
 		},
 		{
-			"src": "^/admin/categories/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/admin/login/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/admin/posts/new/?$",
-			"dest": "_render"
-		},
-		{
 			"src": "^/admin/posts/preview/([^/]+?)/?$",
 			"dest": "_render"
 		},
 		{
 			"src": "^/admin/posts/([^/]+?)/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/admin/posts/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/admin/?$",
 			"dest": "_render"
 		},
 		{
@@ -72,10 +52,6 @@
 			"dest": "_render"
 		},
 		{
-			"src": "^/newsletters/?$",
-			"dest": "_render"
-		},
-		{
 			"src": "^/posts/([^/]+?)/?$",
 			"dest": "_render"
 		},
@@ -85,10 +61,6 @@
 		},
 		{
 			"src": "^/privacy/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/search/?$",
 			"dest": "_render"
 		},
 		{
