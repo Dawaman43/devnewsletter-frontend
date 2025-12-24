@@ -131,6 +131,11 @@ const canonicalURL = Astro.props.canonicalURL || Astro.url.href;
             line-height: 1.2;
             color: var(--text-heading);
         }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
         
         p, li, blockquote {
             font-family: var(--font-serif);
@@ -222,58 +227,7 @@ const canonicalURL = Astro.props.canonicalURL || Astro.url.href;
     <Header showQuote={showHeaderQuote} />
     
     <main class="relative">
-        {showHero && (
-        <section class="relative overflow-hidden bg-gradient-to-br from-amber-50/30 via-orange-50/20 to-yellow-50/30">
-            <div class="absolute inset-0 opacity-[0.03] pointer-events-none">
-                <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0); background-size: 30px 30px;"></div>
-            </div>
-            
-            <div class="relative max-w-7xl mx-auto px-6 py-20 lg:py-32 justify-center items-center flex flex-col text-center">
-                <div class="text-center max-w-4xl mx-auto">
-                    <h1 class="text-6xl md:text-7xl lg:text-8xl font-serif font-medium text-gray-900 leading-tight tracking-tight text-balance mb-8">
-                        Weekly dev
-                        <span class="relative inline-block px-2">
-                            Newsletter
-                            <svg class="absolute w-full h-3 -bottom-1 left-0 text-amber-500" viewBox="0 0 100 10" preserveAspectRatio="none">
-                                <path d="M0 5 Q 50 10 100 5" stroke="currentColor" stroke-width="3" fill="none" />
-                            </svg>
-                        </span>
-                        from your bro
-                    </h1>
-
-                    <p class="text-xl md:text-2xl text-gray-600 font-serif italic leading-relaxed max-w-3xl mx-auto mb-12">
-						Practical tips, short tutorials, and post-mortems for builders who ship. Join for concise dev notes you can use.
-					</p>
-                    
-                    <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                        
-                                <a href="/latest" 
-                           class="group relative inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-amber-600 to-orange-600 text-white rounded-full overflow-hidden shadow-[0_4px_14px_0_rgba(217,119,6,0.39)] transition-all duration-300 ease-out hover:shadow-[0_6px_20px_rgba(217,119,6,0.23)] hover:-translate-y-1 hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-amber-300/40">
-                            
-                            <div class="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-gradient-to-r from-transparent to-white opacity-20 group-hover:animate-[shine_1s_ease-in-out_infinite]" style="left: -100%;"></div>
-                            
-                            <svg class="w-5 h-5 relative z-10 transition-transform duration-300 group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                            </svg>
-                            
-                            <span class="relative z-10 font-serif text-lg font-semibold tracking-wide">Read the newsletter</span>
-                            
-                            <svg class="w-4 h-4 relative z-10 opacity-70 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                            </svg>
-                        </a>
-                                <a href="#latest" 
-                                    class="inline-flex items-center gap-3 px-8 py-4 bg-white/60 backdrop-blur-md text-gray-800 rounded-full font-serif font-medium hover:bg-white hover:text-orange-600 hover:shadow-lg transition-all duration-300 border border-gray-200 group">
-                            <svg class="w-5 h-5 text-gray-500 group-hover:text-orange-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                            </svg>
-                            Wanna hangout?
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        )}
+      
         
         <slot />
     </main>

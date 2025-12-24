@@ -45,7 +45,7 @@ import { ExternalLink, Coffee, Heart, Pen, Github, Mail } from '@lucide/astro';
       <div class="md:col-span-3">
         <h4 class="text-sm font-bold text-gray-400 dark:text-zinc-500 uppercase tracking-widest mb-8">Navigation</h4>
         <nav class="flex flex-col gap-4">
-          {['All Stories', 'Categories', 'Contributors', 'Developer Tools', 'Subscribe', 'About'].map((text) => (
+          {[ 'Categories', 'Contributors', 'Developer Tools', 'Subscribe', 'About'].map((text) => (
             <a 
               href={`/${text.toLowerCase().replace(' ', '-')}`} 
               class="text-gray-700 dark:text-zinc-300 hover:text-amber-600 dark:hover:text-amber-400 font-medium transition-colors"

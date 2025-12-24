@@ -43,14 +43,26 @@ const { id } = Astro.params;
         </div>
       </div>
 
-      <div class="flex items-center">
-        <input 
-          type="checkbox" 
-          id="published" 
-          name="published"
-          class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-        />
-        <label for="published" class="ml-2 text-sm text-gray-700">Published</label>
+      <div class="flex items-center gap-6">
+        <div class="flex items-center">
+            <input 
+            type="checkbox" 
+            id="published" 
+            name="published"
+            class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+            />
+            <label for="published" class="ml-2 text-sm font-bold text-gray-700 uppercase tracking-widest">Published</label>
+        </div>
+
+        <div class="flex items-center">
+            <input 
+            type="checkbox" 
+            id="isAdminPick" 
+            name="isAdminPick"
+            class="w-4 h-4 text-amber-500 border-gray-300 rounded focus:ring-amber-500"
+            />
+            <label for="isAdminPick" class="ml-2 text-sm font-bold text-amber-700 uppercase tracking-widest">★ Admin Pick</label>
+        </div>
       </div>
 
       <div class="flex gap-4">
@@ -133,6 +145,7 @@ const { id } = Astro.params;
         document.getElementById('title').value = post.title;
         document.getElementById('content').value = post.content;
         document.getElementById('published').checked = post.published;
+        document.getElementById('isAdminPick').checked = post.isAdminPick;
 
         // Initialize SimpleMDE after setting content
         simplemde = new SimpleMDE({
@@ -198,7 +211,8 @@ const { id } = Astro.params;
             body: JSON.stringify({
               title: formData.get('title'),
               content: simplemde.value(),
-              published: formData.get('published') === 'on'
+              published: formData.get('published') === 'on',
+              isAdminPick: formData.get('isAdminPick') === 'on'
             })
           });
 
