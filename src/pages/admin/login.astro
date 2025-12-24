@@ -18,7 +18,7 @@ export const prerender = true;
 
     <script>
         (function(){
-            const API_BASE = import.meta.env.VITE_API_BASE_URL ;
+            const API_BASE = import.meta.env.VITE_API_BASE_URL ?? 'https://devnewsletter-backend.onrender.com';
             const btn = document.getElementById('loginBtn');
             btn?.addEventListener('click', async (e) => {
                 e.preventDefault();
