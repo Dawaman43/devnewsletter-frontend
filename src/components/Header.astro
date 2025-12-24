@@ -91,8 +91,14 @@ export let showQuote = false;
           </button>
         </div>
 
-        <div class="mb-6">
-          <input id="mobile-search" type="search" placeholder="Search stories..." class="w-full pl-4 pr-4 py-3 rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 text-gray-900 dark:text-white" />
+        <div class="mb-6 relative">
+          <input id="mobile-search" type="search" placeholder="Search stories..." class="w-full pl-4 pr-4 py-3 rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 text-gray-900 dark:text-white" autocomplete="off" aria-label="Search the newsletter" />
+
+          <div id="mobile-search-suggestions" class="absolute top-full left-0 right-0 mt-3 p-2 bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 rounded-2xl shadow-2xl overflow-hidden hidden">
+            <ul class="flex flex-col gap-1" id="mobile-suggestions-list">
+              <!-- mobile suggestions -->
+            </ul>
+          </div>
         </div>
 
         <nav class="flex flex-col gap-4">
@@ -211,6 +217,74 @@ export let showQuote = false;
         }
         if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
           e.preventDefault();
+        }
+      });
+    }
+
+    // Mobile search behaviour (inline suggestions + Enter -> results)
+    const mobileSearch = document.getElementById('mobile-search');
+    const mobileSuggestionsBox = document.getElementById('mobile-search-suggestions');
+    const mobileSuggestionsList = document.getElementById('mobile-suggestions-list');
+
+    if (mobileSearch) {
+      let mobileDebounce;
+      mobileSearch.addEventListener('input', (e) => {
+        clearTimeout(mobileDebounce);
+        const q = e.target.value;
+        if (!q || q.trim().length === 0) {
+          mobileSuggestionsBox?.classList.add('hidden');
+          return;
+        }
+        mobileDebounce = setTimeout(async () => {
+          try {
+            const res = await fetch(`${apiBase}/api/search?q=${encodeURIComponent(q)}&limit=5`);
+            if (!res.ok) throw new Error('Search failed');
+            const data = await res.json();
+            if (data.posts && data.posts.length > 0) {
+              mobileSuggestionsList.innerHTML = data.posts.map(post => `
+                <li>
+                  <a href="/posts/${post.id}" class="flex items-center gap-3 p-2.5 rounded-lg hover:bg-amber-50 dark:hover:bg-amber-900/10 transition-colors group">
+                     <div class="p-1.5 bg-white dark:bg-zinc-800 rounded border border-gray-100 dark:border-zinc-700">
+                        <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                     </div>
+                     <div class="min-w-0 flex-1">
+                        <div class="text-sm font-bold text-gray-900 dark:text-white truncate">${post.title}</div>
+                     </div>
+                  </a>
+                </li>
+              `).join('') + `
+                <li class="pt-2 mt-2 border-t border-gray-100 dark:border-zinc-800">
+                  <a href="/search?q=${encodeURIComponent(q)}" class="block w-full py-2 text-center text-sm font-bold text-amber-600 dark:text-amber-500 hover:bg-amber-50 dark:hover:bg-amber-900/10 rounded transition-colors">View all results</a>
+                </li>`;
+              mobileSuggestionsBox?.classList.remove('hidden');
+            } else {
+              mobileSuggestionsList.innerHTML = `<li class="p-4 text-center text-sm text-gray-500">No stories found</li>`;
+              mobileSuggestionsBox?.classList.remove('hidden');
+            }
+          } catch (err) {
+            console.error('Mobile search error:', err);
+            mobileSuggestionsBox?.classList.add('hidden');
+          }
+        }, 300);
+      });
+
+      // Hide when clicking outside mobile menu or suggestions
+      document.addEventListener('click', (e) => {
+        const mobileMenuEl = document.getElementById('mobile-menu');
+        if (!mobileMenuEl?.contains(e.target)) {
+          mobileSuggestionsBox?.classList.add('hidden');
+        }
+      });
+
+      mobileSearch.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          const q = mobileSearch.value || '';
+          // navigate to search results and close mobile menu
+          window.location.href = `/search?q=${encodeURIComponent(q)}`;
+          mobileMenu?.classList.add('hidden');
+          document.body.classList.remove('overflow-hidden');
         }
       });
     }
