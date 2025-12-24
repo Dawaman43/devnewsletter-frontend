@@ -65,3 +65,9 @@
 
 ---
 Made with ❤️ by creators.
+
+## Analytics & Security Notes
+
+- To enable Google Analytics, set `PUBLIC_GA_ID` in `newsletter/.env` (see `.env.example`). The site includes a non-blocking loader that only runs when `PUBLIC_GA_ID` is present.
+- To improve email deliverability, add an SPF TXT record to your domain DNS. See `SECURITY.md` for an example SPF entry.
+- A favicon is included at `public/favicon.svg` and referenced from the layout.

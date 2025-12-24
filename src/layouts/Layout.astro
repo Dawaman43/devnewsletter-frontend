@@ -2,7 +2,7 @@
 import Header from "../components/Header.astro"
 import Footer from "../components/Footer.astro"
 import ConsentBanner from "../components/ConsentBanner.astro"
-import "../styles/global.css"
+
 
 interface Props {
   title?: string;
@@ -33,6 +33,9 @@ const DESC_MAX = 130;
 const metaTitle = truncate(title, TITLE_MAX);
 const metaDescription = truncate(description, DESC_MAX);
 const siteLogo = new URL('/favicon.svg', Astro.url).toString();
+const mainCss = new URL('../styles/global.css', import.meta.url).toString();
+const metaKeywords = 'developer newsletter, web development, JavaScript, TypeScript, dev tools, tutorials, post-mortems';
+const metaTitleFull = metaTitle + ' — Developer newsletter, JavaScript & Web Dev';
 const structuredData = JSON.stringify({
     "@context": "https://schema.org",
     "@graph": [
@@ -65,8 +68,9 @@ const structuredData = JSON.stringify({
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{metaTitle}</title>
+    <title>{metaTitleFull}</title>
     <meta name="description" content={metaDescription}>
+    <meta name="keywords" content={metaKeywords}>
     <link rel="canonical" href={canonicalURL}>
 
     <!-- Open Graph / Facebook -->
@@ -95,7 +99,13 @@ const structuredData = JSON.stringify({
 
         <!-- Preload fallback OG image used across pages to improve LCP on social previews and list pages -->
         <link rel="preload" as="image" href="/og-image.jpg">
-    
+
+        <!-- Load main stylesheet non-blocking: preload then swap to stylesheet onload -->
+        <link rel="preload" as="style" href={mainCss} onload="this.rel='stylesheet'">
+        <noscript>
+            <link rel="stylesheet" href={mainCss}>
+        </noscript>
+
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="shortcut icon" href="/favicon.svg">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.svg">
@@ -106,6 +116,31 @@ const structuredData = JSON.stringify({
         document.documentElement.classList.add('dark')
         try { localStorage.theme = 'dark' } catch (e) { /* ignore */ }
     </script>
+
+        <!-- Google Analytics (optional) - set PUBLIC_GA_ID in environment to enable -->
+        <!-- Non-blocking: load gtag async and initialize only if a GA ID is provided -->
+        {
+            /* @ts-ignore */
+        }
+                <script is:inline>
+                        const GA_ID = import.meta.env.PUBLIC_GA_ID || '';
+                        try {
+                            const consent = typeof localStorage !== 'undefined' ? localStorage.getItem('caching-consent') : null;
+                            if (GA_ID && consent !== 'rejected') {
+                                const s = document.createElement('script');
+                                s.async = true;
+                                s.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+                                document.head.appendChild(s);
+
+                                window.dataLayer = window.dataLayer || [];
+                                function gtag(){dataLayer.push(arguments);} 
+                                gtag('js', new Date());
+                                gtag('config', GA_ID, { 'anonymize_ip': true });
+                            }
+                        } catch (e) {
+                            // Ignore if localStorage isn't available or any errors
+                        }
+                </script>
 
     <style>
         :root {

@@ -1,0 +1,22 @@
+---
+import Layout from "../layouts/Layout.astro";
+export const prerender = true;
+---
+
+<Layout title="Page not found — DevNewsletter" description="We couldn't find that page. Explore popular sections or return home.">
+  <section style="padding:4rem; max-width:800px; margin:0 auto; text-align:center;">
+    <h1 class="text-4xl font-bold mb-4">404 — Page not found</h1>
+    <p class="mb-6">Sorry — the page you're looking for doesn't exist. Here are some helpful links:</p>
+    <ul style="list-style:none; padding:0; display:flex; gap:1rem; justify-content:center; flex-wrap:wrap">
+      <li><a href="/" class="transition-base">Home</a></li>
+      <li><a href="/newsletters" class="transition-base">Newsletters</a></li>
+      <li><a href="/archive" class="transition-base">Archive</a></li>
+      <li><a href="/categories" class="transition-base">Categories</a></li>
+      <li><a href="/admin/login" class="transition-base">Admin Login</a></li>
+    </ul>
+
+    <div style="margin-top:2rem"> 
+      <a href="/" style="color:var(--color-primary);">Return to DevNewsletter homepage</a>
+    </div>
+  </section>
+</Layout>

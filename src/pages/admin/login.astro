@@ -3,24 +3,24 @@ import Layout from "../../layouts/Layout.astro";
 export const prerender = true;
 ---
 
-<Layout>
-    <h1 class="text-3xl font-bold mb-6">Admin Login</h1>
+<Layout title="Admin Login — DevNewsletter" description="Admin login for DevNewsletter — manage newsletters, posts, and categories">
+    <h1 class="text-3xl font-bold mb-6">Admin Login — DevNewsletter</h1>
 
-    <div class="max-w-md">
-        <label class="block text-sm font-medium text-gray-700">Email</label>
-        <input id="email" type="email" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" />
+    <form id="loginForm" class="max-w-md" aria-labelledby="admin-login-form">
+        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+        <input id="email" name="email" required type="email" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" />
 
-        <label class="block text-sm font-medium text-gray-700 mt-4">Password</label>
-        <input id="password" type="password" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" />
+        <label for="password" class="block text-sm font-medium text-gray-700 mt-4">Password</label>
+        <input id="password" name="password" required type="password" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" />
 
-        <button id="loginBtn" class="w-full bg-amber-600 text-white py-2 px-4 rounded-md hover:bg-amber-700 mt-6">Login</button>
-    </div>
+        <button type="submit" class="w-full bg-amber-600 text-white py-2 px-4 rounded-md hover:bg-amber-700 mt-6">Login</button>
+    </form>
 
-    <script>
+    <script type="module">
         (function(){
             const API_BASE = import.meta.env.VITE_API_BASE_URL ?? 'https://devnewsletter-backend.onrender.com';
-            const btn = document.getElementById('loginBtn');
-            btn?.addEventListener('click', async (e) => {
+            const form = document.getElementById('loginForm');
+            form?.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const email = (document.getElementById('email') as HTMLInputElement).value;
                 const password = (document.getElementById('password') as HTMLInputElement).value;

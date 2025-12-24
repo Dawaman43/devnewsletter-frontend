@@ -55,7 +55,7 @@ const seoDescription = post?.content
 <Layout title={post?.title ?? "Post"} description={seoDescription}>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
   
-  <div class="container" data-post-id={id} data-api-base={API_BASE}>
+  <div class="container" data-post-id={id} data-api-base={API_BASE} data-title={post?.title} data-excerpt={post?.content ? post.content.replace(/[#*`]/g, '').substring(0, 220).trim() : ''} data-likes={post?.likes || 0} data-image={post?.image || ''}>
     {error || !post ? (
       <div class="error-message">
         {error ?? 'This post could not be loaded.'}
@@ -83,6 +83,18 @@ const seoDescription = post?.content
             <span class="flex items-center gap-1">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
               <span id="view-count">{post.views || 0} views</span>
+            </span>
+
+            <span class="flex items-center gap-3">
+              <button id="like-btn" class="like-btn flex items-center gap-2 px-3 py-1 bg-transparent border border-gray-300 rounded-md hover:bg-gray-100">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+                <span id="like-count">{post?.likes || 0}</span>
+              </button>
+
+              <button id="share-btn" class="share-btn flex items-center gap-2 px-3 py-1 bg-transparent border border-gray-300 rounded-md hover:bg-gray-100">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12v7a1 1 0 001 1h14a1 1 0 001-1v-7"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v12"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7l4-4 4 4"/></svg>
+                <span>Share</span>
+              </button>
             </span>
           </div>
         </header>
@@ -146,7 +158,102 @@ const seoDescription = post?.content
       wrapper.insertBefore(header, pre);
       pre.classList.add('!mt-0', '!rounded-t-none');
     });
+
+    // Like button logic
+    const likeBtn = document.getElementById('like-btn');
+    const likeCountEl = document.getElementById('like-count');
+    if (likeBtn) {
+      likeBtn.addEventListener('click', () => {
+        if (!postId || !apiBase) return;
+        fetch(`${apiBase}/api/posts/${postId}/like`, { method: 'POST' })
+          .then(res => res.json())
+          .then(data => {
+            if (data && typeof data.likes !== 'undefined') {
+              likeCountEl.textContent = data.likes;
+            }
+          })
+          .catch(err => console.error('Failed to like post:', err));
+      });
+    }
+
+    // Share button logic: try native share, otherwise show preview modal
+    const shareBtn = document.getElementById('share-btn');
+    const containerEl = document.querySelector('.container');
+    if (shareBtn && containerEl) {
+      shareBtn.addEventListener('click', async () => {
+        const title = containerEl.getAttribute('data-title') || document.title;
+        const excerpt = containerEl.getAttribute('data-excerpt') || '';
+        const image = containerEl.getAttribute('data-image') || '';
+        const url = window.location.href;
+
+        const shareData = { title, text: excerpt, url };
+
+        if (navigator.share) {
+          try {
+            await navigator.share(shareData);
+            return;
+          } catch (err) {
+            console.warn('Native share failed, falling back to preview', err);
+          }
+        }
+
+        // Fallback: populate and show preview modal
+        const preview = document.getElementById('share-preview');
+        if (preview) {
+          preview.querySelector('.preview-title').textContent = title;
+          preview.querySelector('.preview-excerpt').textContent = excerpt;
+          const imgEl = preview.querySelector('.preview-image');
+          if (image) {
+            imgEl.src = image;
+            imgEl.style.display = 'block';
+          } else {
+            imgEl.style.display = 'none';
+          }
+          preview.querySelector('.preview-link').textContent = url;
+          preview.querySelector('.preview-link').href = url;
+          preview.classList.remove('hidden');
+        }
+      });
+    }
+
+    // Modal actions: copy link and close
+    document.addEventListener('click', (e) => {
+      const target = e.target;
+      if (target.matches('#copy-link-btn')) {
+        const url = window.location.href;
+        navigator.clipboard.writeText(url).then(() => {
+          target.textContent = 'Copied!';
+          setTimeout(() => target.textContent = 'Copy link', 1500);
+        });
+      }
+      if (target.matches('#close-preview-btn') || target.matches('#share-preview')) {
+        const preview = document.getElementById('share-preview');
+        if (preview) preview.classList.add('hidden');
+      }
+    });
   </script>
+
+  <!-- Share preview modal (fallback when navigator.share not available) -->
+  <div id="share-preview" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60" role="dialog">
+    <div class="bg-black text-white rounded-lg max-w-xl w-full mx-4 overflow-hidden border border-gray-800">
+      <div class="p-4 border-b border-gray-800 flex items-start justify-between">
+        <h3 class="font-semibold">Share post</h3>
+        <button id="close-preview-btn" class="text-gray-300 hover:text-white">✕</button>
+      </div>
+      <div class="p-4 flex gap-4 items-start">
+        <img class="preview-image w-28 h-20 object-cover rounded-md" src="" alt="" style="display:none; background:#111" />
+        <div class="flex-1">
+          <div class="preview-title font-bold text-lg"></div>
+          <div class="preview-excerpt text-sm text-gray-300 mt-2"></div>
+          <a class="preview-link text-xs text-blue-300 break-words block mt-2" href="#"></a>
+        </div>
+      </div>
+      <div class="p-4 border-t border-gray-800 flex items-center justify-end gap-2">
+        <button id="copy-link-btn" class="px-3 py-1 border border-gray-600 rounded text-white bg-transparent hover:bg-white/10">Copy link</button>
+        <a class="px-3 py-1 bg-white/10 text-white rounded hover:bg-white/20" href="#" id="open-share-link" target="_blank">Open Link</a>
+      </div>
+    </div>
+  </div>
 </Layout>
 
 <style>
@@ -390,3 +497,12 @@ const seoDescription = post?.content
     .prose :global(h2) { font-size: 1.5em; }
   }
 </style>
+
+  <style>
+    /* Simple styles for share modal and buttons */
+    #share-preview.hidden { display: none; }
+    #share-preview img.preview-image { background: #f3f4f6; }
+    .like-btn { min-width: 56px; }
+    .share-btn { min-width: 72px; }
+    .bg-primary { background-color: var(--color-primary); }
+  </style>
