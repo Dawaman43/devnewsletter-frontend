@@ -246,13 +246,15 @@ function extractImage(content: any): string | null {
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto">
           {adminPicks.map((post: any) => {
-            const img = extractImage(post.content) || '/og-image.jpg';
-            const srcset = `${img}?w=320 320w, ${img}?w=640 640w`;
+            const img = extractImage(post.content);
+            const srcset = img ? `${img}?w=320 320w, ${img}?w=640 640w` : '';
             return (
               <article class="group relative flex flex-col sm:flex-row gap-4 sm:gap-6 p-4 sm:p-6 bg-white dark:bg-zinc-900/70 rounded-2xl sm:rounded-3xl border-2 border-gray-100 dark:border-zinc-800/50 hover:border-amber-500/50 dark:hover:border-amber-500/30 hover:shadow-2xl transition-all duration-300 text-left overflow-hidden">
-                <div class="shrink-0 w-full sm:w-40 h-40 sm:h-32 overflow-hidden rounded-xl sm:rounded-2xl border-2 border-gray-200 dark:border-zinc-700 group-hover:border-amber-500/50 transition-colors">
-                  <img src={img} srcset={srcset} sizes="(max-width: 640px) 100vw, 160px" alt={post.title} class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" />
-                </div>
+                {img ? (
+                  <div class="shrink-0 w-full sm:w-40 h-40 sm:h-32 overflow-hidden rounded-xl sm:rounded-2xl border-2 border-gray-200 dark:border-zinc-700 group-hover:border-amber-500/50 transition-colors">
+                    <img src={img} srcset={srcset} sizes="(max-width: 640px) 100vw, 160px" alt={post.title} class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" />
+                  </div>
+                ) : null}
                 <div class="flex flex-col justify-center gap-2 sm:gap-3 relative z-10">
                   <span class="inline-flex items-center gap-2 px-2 sm:px-3 py-1 bg-amber-500 text-white text-[10px] font-bold uppercase tracking-[0.2em] rounded-full w-fit">⭐ Editor's Choice</span>
                   <h3 class="text-lg sm:text-xl font-serif font-bold leading-tight group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
