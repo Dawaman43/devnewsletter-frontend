@@ -33,6 +33,7 @@ export const prerender = false;
                     const data = await res.json();
                     if (res.ok && data.token) {
                         localStorage.setItem('token', data.token);
+                        console.debug('stored token', data.token.slice(0,20));
                         // set cookie as fallback for SSR checks
                         document.cookie = `token=${encodeURIComponent(data.token)}; path=/`;
                         window.location.href = '/admin';

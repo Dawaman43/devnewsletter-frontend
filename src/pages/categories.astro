@@ -1,64 +1,119 @@
 ---
-export const prerender = true;
+import Layout from '../layouts/Layout.astro';
 
-const modules: any[] = Object.values(
-    import.meta.glob('../../content/**/*.{md,mdx,svx}', { eager: true })
-);
+const API_BASE = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:3000';
 
-const posts = modules
-    .map((m: any) => m.frontmatter ?? m.metadata ?? {})
-    .filter(Boolean);
+let categories = [];
 
-const map = new Map();
-for (const post of posts) {
-    const cats = post.categories ?? post.category ?? [];
-    const arr = Array.isArray(cats) ? cats : [cats];
-    for (const c of arr) {
-        if (!c) continue;
-        map.set(c, (map.get(c) || 0) + 1);
-    }
+try {
+  const res = await fetch(`${API_BASE}/api/categories`);
+  categories = await res.json();
+} catch (err) {
+  console.error('Failed to load categories:', err);
 }
-const categories = Array.from(map.entries()).sort((a, b) => b[1] - a[1]);
-
-const slug = (s: string) =>
-    encodeURIComponent(
-        s
-            .toLowerCase()
-            .trim()
-            .replace(/\s+/g, '-')
-            .replace(/[^\w-]/g, '')
-    );
 ---
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>Categories</title>
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <style>
-            :root { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; padding: 20px; }
-            a { color: #0b5fff; text-decoration: none; }
-            a:hover { text-decoration: underline; }
-            .list { max-width: 640px; margin: 0; padding: 0; list-style: none; }
-            .item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; }
-            .empty { color: #666; }
-        </style>
-    </head>
-    <body>
-        <main>
-            <h1>Categories</h1>
 
-            {categories.length === 0 ? (
-                <p class="empty">No categories found.</p>
-            ) : (
-                <ul class="list">
-                    {categories.map(([name, count]) => (
-                        <li class="item">
-                            <a href={`/categories/${slug(String(name))}/`}>{name}</a>
-                            <span>{count}</span>
-                        </li>
-                    ))}
-                </ul>
-            )}
-        </main>
-    </body>
-</html>
+<Layout title="Categories - DevNewsletter">
+  <div class="container">
+    <header class="page-header">
+      <h1 class="page-title">Browse by Category</h1>
+      <p class="page-subtitle">Explore articles organized by topic</p>
+    </header>
+
+    {categories.length === 0 ? (
+      <div class="empty-state">
+        <p>No categories yet.</p>
+      </div>
+    ) : (
+      <div class="categories-grid">
+        {categories.map(cat => (
+          <a href={`/categories/${cat.slug}`} class="category-card">
+            <div class="category-icon">📁</div>
+            <h2 class="category-name">{cat.name}</h2>
+            <p class="category-description">View all posts in {cat.name}</p>
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .page-title {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #1f2937;
+    margin-bottom: 1rem;
+  }
+
+  .page-subtitle {
+    font-size: 1.25rem;
+    color: #6b7280;
+  }
+
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .category-card {
+    background: white;
+    border: 2px solid #e5e7eb;
+    border-radius: 1rem;
+    padding: 2.5rem;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .category-card:hover {
+    border-color: #667eea;
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(102, 126, 234, 0.15);
+  }
+
+  .category-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .category-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 0.5rem;
+  }
+
+  .category-description {
+    color: #6b7280;
+    font-size: 0.875rem;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #6b7280;
+  }
+
+  @media (max-width: 768px) {
+    .page-title {
+      font-size: 2.5rem;
+    }
+
+    .categories-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
