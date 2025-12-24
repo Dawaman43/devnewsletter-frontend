@@ -22,6 +22,42 @@ const {
 } = Astro.props;
 
 const canonicalURL = Astro.props.canonicalURL || Astro.url.href;
+
+function truncate(str: string | undefined, max = 130) {
+    if (!str) return '';
+    return str.length > max ? str.slice(0, max - 1).trim() + '…' : str;
+}
+
+const TITLE_MAX = 60;
+const DESC_MAX = 130;
+const metaTitle = truncate(title, TITLE_MAX);
+const metaDescription = truncate(description, DESC_MAX);
+const siteLogo = new URL('/favicon.svg', Astro.url).toString();
+const structuredData = JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Organization",
+            "name": "DevNewsletter",
+            "url": canonicalURL,
+            "logo": siteLogo,
+            "sameAs": [
+                "https://x.com/dawitcodes",
+                "https://github.com/dawaman43",
+                "https://www.linkedin.com/company/devnewsletter",
+                "https://www.youtube.com/@devnewsletter",
+                "https://www.instagram.com/devnewsletter",
+                "https://www.facebook.com/devnewsletter"
+            ]
+        },
+        {
+            "@type": "WebSite",
+            "url": canonicalURL,
+            "name": metaTitle,
+            "description": metaDescription
+        }
+    ]
+}, null, 2);
 ---
 
 <!DOCTYPE html>
@@ -29,30 +65,40 @@ const canonicalURL = Astro.props.canonicalURL || Astro.url.href;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{title}</title>
-    <meta name="description" content={description}>
+    <title>{metaTitle}</title>
+    <meta name="description" content={metaDescription}>
     <link rel="canonical" href={canonicalURL}>
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content={canonicalURL}>
-    <meta property="og:title" content={title}>
-    <meta property="og:description" content={description}>
+    <meta property="og:title" content={metaTitle}>
+    <meta property="og:description" content={metaDescription}>
     <meta property="og:image" content={new URL(image, Astro.url).toString()}>
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content={canonicalURL}>
-    <meta property="twitter:title" content={title}>
-    <meta property="twitter:description" content={description}>
-    <!-- Structured Data: Temporarily removed due to compiler panic -->
+    <meta property="twitter:title" content={metaTitle}>
+    <meta property="twitter:description" content={metaDescription}>
+        <link rel="alternate" hreflang="en" href={canonicalURL} />
+        <script type="application/ld+json" is:inline>
+            {structuredData}
+        </script>
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" onload="this.rel='stylesheet'">
+        <noscript>
+            <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        </noscript>
+
+        <!-- Preload fallback OG image used across pages to improve LCP on social previews and list pages -->
+        <link rel="preload" as="image" href="/og-image.jpg">
     
-    <link rel="icon" href="/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="shortcut icon" href="/favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.svg">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
     <script is:inline>
