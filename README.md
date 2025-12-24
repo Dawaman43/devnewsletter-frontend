@@ -1,46 +1,67 @@
-# Astro Starter Kit: Basics
+# DevNewsletter 🚀
 
-```sh
-pnpm create astro@latest -- --template basics
-```
+**DevNewsletter** is a premium, weekly newsletter platform designed for developers who ship. It features curated dev notes, practical tutorials, and industry insights, all wrapped in a stunning, high-performance web experience.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## ✨ Features
 
-## 🚀 Project Structure
+-   **High-Impact Hero**: A beautifully centered and animated hero section to welcome readers.
+-   **Curated Content**:
+    -   **Top Stories**: Automatically highlights the most-read posts this week.
+    -   **Admin Picks**: Hand-curated content selected by editors.
+    -   **Latest Stories**: Real-time updates on the newest developer notes.
+-   **Modern UI/UX**:
+    -   **Elite Dark Mode**: Seamless theme switching with persistent settings.
+    -   **Glassmorphism**: Elegant, semi-transparent components for a premium feel.
+    -   **Advanced Animations**: Subtle micro-interactions and intersection-based scroll animations.
+-   **Powerful Search**: Instant search suggestions with keyboard shortcuts (⌘K).
+-   **Admin Dashboard**: Fully functional CMS for managing posts, categories, and "Admin Pick" status.
+-   **Theme-Aware Legal Pages**: Custom-designed Privacy and Terms pages.
 
-Inside of your Astro project, you'll see the following folders and files:
+## 🛠 Tech Stack
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+-   **Frontend**: Built with **Astro**, **Tailwind CSS**, and **Lucide Icons**.
+-   **Backend**: Powered by **ElysiaJS** (for blazing fast API performance) and **Bun**.
+-   **Database**: **PostgreSQL** with **Drizzle ORM**.
+-   **Images**: Cloudinary for optimized image delivery.
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 🚀 Getting Started
 
-## 🧞 Commands
+### Prerequisites
 
-All commands are run from the root of the project, from a terminal:
+-   [Bun](https://bun.sh/) installed.
+-   PostgreSQL database instance.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+### Installation
 
-## 👀 Want to learn more?
+1.  **Clone the repository**:
+    ```bash
+    git clone https://github.com/your-repo/devnewsletter.git
+    cd devnewsletter
+    ```
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+2.  **Setup the Backend**:
+    ```bash
+    cd devnewsletter
+    npm install
+    # Copy .env.example to .env and fill in your DATABASE_URL and CLOUDINARY credentials
+    bun run src/index.ts
+    ```
+
+3.  **Setup the Frontend**:
+    ```bash
+    cd newsletter
+    pnpm install
+    # Copy .env.example to .env and set VITE_API_BASE_URL
+    pnpm dev
+    ```
+
+##  Genie Commands
+
+| Command | Action |
+| :--- | :--- |
+| `pnpm dev` | Starts local dev server at `localhost:4321` |
+| `pnpm build` | Build your production site to `./dist/` |
+| `pnpm preview` | Preview your build locally |
+
+---
+Made with ❤️ by creators.

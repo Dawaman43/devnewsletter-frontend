@@ -1,6 +1,7 @@
 ---
 import Header from "../components/Header.astro"
 import Footer from "../components/Footer.astro"
+import ConsentBanner from "../components/ConsentBanner.astro"
 import "../styles/global.css"
 
 interface Props {
@@ -233,6 +234,7 @@ const canonicalURL = Astro.props.canonicalURL || Astro.url.href;
     </main>
     
     <Footer />
+    <ConsentBanner />
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
