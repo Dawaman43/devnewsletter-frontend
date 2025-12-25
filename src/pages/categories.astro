@@ -1,12 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL ;
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
 
 let categories = [];
 
 try {
-  const res = await fetch(`${API_BASE}/api/categories`);
+  const endpoint = API_BASE.length > 0 ? `${API_BASE}/api/categories` : `/api/categories`;
+  const res = await fetch(endpoint);
   categories = await res.json();
 } catch (err) {
   console.error('Failed to load categories:', err);
@@ -53,13 +54,13 @@ try {
   .page-title {
     font-size: 3rem;
     font-weight: 800;
-    color: #1f2937;
+    color: var(--text-heading);
     margin-bottom: 1rem;
   }
 
   .page-subtitle {
     font-size: 1.25rem;
-    color: #6b7280;
+    color: var(--text-main);
   }
 
   .categories-grid {
@@ -69,19 +70,25 @@ try {
   }
 
   .category-card {
-    background: white;
-    border: 2px solid #e5e7eb;
+    background: var(--color-gray-50);
+    border: 2px solid var(--color-gray-200);
     border-radius: 1rem;
     padding: 2.5rem;
     text-align: center;
     text-decoration: none;
     transition: all 0.3s ease;
+    color: var(--text-main);
+  }
+
+  :root.dark .category-card {
+    background: rgba(255,255,255,0.02);
+    border-color: #27272a;
   }
 
   .category-card:hover {
-    border-color: #667eea;
+    border-color: var(--color-primary);
     transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(102, 126, 234, 0.15);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.45);
   }
 
   .category-icon {
@@ -92,19 +99,19 @@ try {
   .category-name {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #1f2937;
+    color: var(--text-heading);
     margin-bottom: 0.5rem;
   }
 
   .category-description {
-    color: #6b7280;
+    color: var(--text-main);
     font-size: 0.875rem;
   }
 
   .empty-state {
     text-align: center;
     padding: 4rem 2rem;
-    color: #6b7280;
+    color: var(--text-main);
   }
 
   @media (max-width: 768px) {
