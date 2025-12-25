@@ -51,17 +51,27 @@ const API_BASE = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:3000';
         const postsRes = await fetch(`${API_BASE}/admin/posts`, {
           headers: { Authorization: `Bearer ${token}` }
         });
-        const posts = await postsRes.json();
+        if (!postsRes.ok) {
+          if (postsRes.status === 401) return window.location.href = '/admin/login';
+          throw new Error('Failed to fetch posts: ' + postsRes.status);
+        }
+        const postsJson = await postsRes.json();
+        const posts = Array.isArray(postsJson) ? postsJson : [];
 
         // Fetch categories
         const catsRes = await fetch(`${API_BASE}/admin/categories`, {
           headers: { Authorization: `Bearer ${token}` }
         });
-        const categories = await catsRes.json();
+        if (!catsRes.ok) {
+          if (catsRes.status === 401) return window.location.href = '/admin/login';
+          throw new Error('Failed to fetch categories: ' + catsRes.status);
+        }
+        const catsJson = await catsRes.json();
+        const categories = Array.isArray(catsJson) ? catsJson : [];
 
         // Update stats
         document.getElementById('totalPosts').textContent = posts.length;
-        document.getElementById('publishedPosts').textContent = posts.filter(p => p.published).length;
+        document.getElementById('publishedPosts').textContent = (Array.isArray(posts) ? posts.filter(p => p.published).length : 0);
         document.getElementById('totalCategories').textContent = categories.length;
 
         // Show recent posts

@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 export const prerender = true;
+const API_BASE = import.meta.env.VITE_API_BASE_URL ?? '';
 ---
 
 <Layout title="Admin Login — DevNewsletter" description="Admin login for DevNewsletter — manage newsletters, posts, and categories">
@@ -16,9 +17,8 @@ export const prerender = true;
         <button type="submit" class="w-full bg-amber-600 text-white py-2 px-4 rounded-md hover:bg-amber-700 mt-6">Login</button>
     </form>
 
-    <script type="module">
+    <script type="module" define:vars={{ API_BASE }}>
         (function(){
-            const API_BASE = import.meta.env.VITE_API_BASE_URL ?? 'https://devnewsletter-backend.onrender.com';
             const form = document.getElementById('loginForm');
             form?.addEventListener('submit', async (e) => {
                 e.preventDefault();
