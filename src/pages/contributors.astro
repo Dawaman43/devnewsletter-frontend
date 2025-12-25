@@ -6,15 +6,15 @@ const description = 'This newsletter is an open-source project — currently mai
 ---
 
 <Layout title={title} description={description}>
-  <header class="relative overflow-hidden bg-gradient-to-b from-amber-50/60 to-transparent py-20">
+  <header class="relative overflow-hidden py-20 bg-[var(--bg-body)]">
     <div class="max-w-7xl mx-auto px-6 text-center">
-      <h1 class="text-5xl md:text-6xl font-serif font-medium text-gray-900 mb-6">
+      <h1 class="text-5xl md:text-6xl font-serif font-medium text-white mb-6">
         Contributors
       </h1>
-      <p class="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+      <p class="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
         {description}
       </p>
-      <p class="mt-8 text-lg text-gray-700 max-w-3xl mx-auto">
+      <p class="mt-8 text-lg text-gray-300 max-w-3xl mx-auto">
         The project is fully open source. If you're interested in writing stories, sharing tools, or improving the site, we'd love your contributions! 
         Check out the repository and open an issue or pull request.
       </p>
@@ -23,9 +23,9 @@ const description = 'This newsletter is an open-source project — currently mai
 
   <section class="max-w-7xl mx-auto px-6 py-16">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-      <article class="group relative bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-3">
+      <article class="group relative bg-white/80 dark:bg-zinc-900/80 rounded-2xl border border-gray-200 dark:border-zinc-800 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2">
         <div class="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-orange-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-        
+
         <div class="relative p-8">
           <div class="flex items-center gap-6 mb-8">
             <div class="relative p-1 bg-gradient-to-br from-amber-400 to-orange-600 rounded-2xl">
@@ -39,12 +39,12 @@ const description = 'This newsletter is an open-source project — currently mai
             </div>
             
             <div class="flex-1">
-              <h3 class="text-2xl font-serif font-medium text-gray-900 mb-1">Dawit Worku</h3>
-              <p class="text-amber-700 font-medium">Founder & Developer</p>
+              <h3 class="text-2xl font-serif font-medium text-white mb-1">Dawit Worku</h3>
+              <p class="text-amber-300 font-medium">Founder & Developer</p>
             </div>
           </div>
 
-          <div class="prose prose-sm text-gray-600 leading-relaxed mb-8">
+          <div class="prose prose-sm text-gray-300 leading-relaxed mb-8">
             <p class="mb-4">
               Passionate full-stack developer with a love for crafting thoughtful tools and sharing knowledge with the developer community.
             </p>
@@ -58,7 +58,7 @@ const description = 'This newsletter is an open-source project — currently mai
               href="https://x.com/dawitcodes" 
               target="_blank" 
               rel="noopener"
-              class="inline-flex items-center gap-2 px-5 py-3 bg-amber-100 text-amber-800 font-medium rounded-xl hover:bg-amber-200 transition-all duration-300 hover:-translate-y-0.5"
+              class="inline-flex items-center gap-2 px-5 py-3 bg-amber-100/60 dark:bg-amber-900/20 text-amber-800 dark:text-amber-300 font-medium rounded-xl hover:bg-amber-200/60 transition-all duration-300 hover:-translate-y-0.5"
             >
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
@@ -92,6 +92,7 @@ const description = 'This newsletter is an open-source project — currently mai
       </article>
     </div>
 
+    <div class="mt-16 text-center">
     <div class="mt-16 text-center">
       <a 
         href="https://github.com/dawaman43/devnewsletter" 
