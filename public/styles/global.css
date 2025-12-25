@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+/* Reduce base font size slightly so site text appears smaller */
+html {
+	/* 14px base reduces most Tailwind rem-based sizes proportionally */
+	font-size: 14px;
+}
+
+/* Keep body at 1rem (now 14px) and tighten heading scale a bit */
+body {
+	font-size: 1rem;
+}
+
+h1 { font-size: 2rem; line-height: 1.1; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.25rem; }
+h4 { font-size: 1.125rem; }
+
+/* Optional: slightly reduce large elements that use rem directly */
+.prose h1 { font-size: 2rem; }
