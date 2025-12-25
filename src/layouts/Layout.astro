@@ -28,8 +28,8 @@ function truncate(str: string | undefined, max = 130) {
     return str.length > max ? str.slice(0, max - 1).trim() + '…' : str;
 }
 
-const TITLE_MAX = 60;
-const DESC_MAX = 130;
+const TITLE_MAX = 70;
+const DESC_MAX = 155;
 const metaTitle = truncate(title, TITLE_MAX);
 const metaDescription = truncate(description, DESC_MAX);
 const siteLogo = new URL('/favicon.svg', Astro.url).toString();
@@ -38,7 +38,8 @@ const mainCss = new URL('/styles/global.css', Astro.url).toString();
 // Inject GA ID as a server-side literal for client scripts (avoids using import.meta in browser)
 const GA_ENV_JSON = JSON.stringify(import.meta.env.PUBLIC_GA_ID || '');
 const metaKeywords = 'developer newsletter, web development, JavaScript, TypeScript, dev tools, tutorials, post-mortems';
-const metaTitleFull = metaTitle + ' — Developer newsletter, JavaScript & Web Dev';
+// Keep the full title concise (already truncated by `metaTitle`) to avoid overly long <title>
+const metaTitleFull = metaTitle;
 const structuredData = JSON.stringify({
     "@context": "https://schema.org",
     "@graph": [
@@ -73,6 +74,7 @@ const structuredData = JSON.stringify({
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{metaTitleFull}</title>
     <meta name="description" content={metaDescription}>
+    <meta name="robots" content="index, follow">
     <meta name="keywords" content={metaKeywords}>
     <meta name="google-site-verification" content="VIttD65rz5oWESMQ9G4tGg9ZbNQuDxAfAojoPmRvHq0" />
     <link rel="canonical" href={canonicalURL}>
@@ -80,15 +82,17 @@ const structuredData = JSON.stringify({
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content={canonicalURL}>
-    <meta property="og:title" content={metaTitle}>
+    <meta property="og:site_name" content="DevNewsletter">
+    <meta property="og:title" content={metaTitleFull}>
     <meta property="og:description" content={metaDescription}>
     <meta property="og:image" content={new URL(image, Astro.url).toString()}>
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content={canonicalURL}>
-    <meta property="twitter:title" content={metaTitle}>
-    <meta property="twitter:description" content={metaDescription}>
+    <meta name="twitter:title" content={metaTitleFull}>
+    <meta name="twitter:description" content={metaDescription}>
+    <meta name="twitter:image" content={new URL(image, Astro.url).toString()}>
         <link rel="alternate" hreflang="en" href={canonicalURL} />
         <script type="application/ld+json" is:inline>
             {structuredData}
